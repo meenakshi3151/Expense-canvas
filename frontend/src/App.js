@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import styled from "styled-components"
+import bg from './image/bg.png'
+import React from "react"
+import {MainLayout} from './styles/Layout'
+import Animation from './components/Animation/Animation'
+import Navigation from './components/Navigation/Navigation'
+import { useState } from "react"
+function App(){
+      const [active,setActive]=useState(1);
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+       
+    return(
+        <AppStyled bg={bg} >
+            <Animation/>
+            <MainLayout >
+                <Navigation active={active} setActive={setActive}/>
+            </MainLayout>
+        </AppStyled>
+    )
 }
+
+const AppStyled=styled.div`
+    height:100vh;
+    background-image :url(${props=>props.bg});
+    position:relative;
+`;
+
 
 export default App;
