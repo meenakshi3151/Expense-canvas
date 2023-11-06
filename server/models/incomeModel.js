@@ -29,13 +29,18 @@ const IncomeSchema=new mongoose.Schema({
     amount:{
         type:Number,
         required:true,
-        maxLenght:20,
+        maxLength:20,
         trim:true
     },
     category:{
         type:String,
         required:true,
-        maxLenght:20,
+        maxLength:20,
+        trim:true
+    },
+    description:{
+        type:String,
+        required:true,
         trim:true
     }
 },{timestamps:true})
