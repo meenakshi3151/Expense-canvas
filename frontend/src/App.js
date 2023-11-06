@@ -9,9 +9,11 @@ import Dashboard from "./components/Dashboard/Dashboard"
 import Income from "./components/Incomes/Income"
 import Expense from "./components/Expenses/Expenses"
 import Crypto from './components/StocksCryptos/Crypto'
+import { useGlobalContext } from "./context/globalContext"
 function App(){
     const [active,setActive]=useState(1);
-
+    const use=useGlobalContext();
+    console.log(use);
     const displayData=()=>{
         switch(active){
             case 1:
