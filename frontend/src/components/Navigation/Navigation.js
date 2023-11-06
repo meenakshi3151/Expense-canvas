@@ -4,9 +4,7 @@ import styled from 'styled-components'
 function Navigation({active,setActive}){
     return (
         <NavStyled>
-            {/* <div className="user-con">
-
-            </div> */}
+            
             <ul className="menu-items">
                 {menuItems.map((item)=>{
                     return <li

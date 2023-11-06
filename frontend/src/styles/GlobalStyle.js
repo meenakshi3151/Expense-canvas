@@ -51,10 +51,3 @@ export const GlobalStyle = createGlobalStyle`
         }
     }
 `;
-// import react from 'react'
-// const GlobalStyle =()=>{
-//     return(
-//         <div>hello</div>
-//     )
-// }
-// export default GlobalStyle;
