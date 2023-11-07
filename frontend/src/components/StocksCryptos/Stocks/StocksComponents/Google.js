@@ -23,7 +23,7 @@ import { Content } from '../Stocks.style';
         .then((data) => {
           console.log(data);
           //dates on x axis
-          for(var key in data['Time Series (Daily']){
+          for(var key in data['Time Series (Daily)']){
             stockXValuesFunction.push(key);
             //opening price on y axis
             stockXValuesFunction.push(data['Time Series(Daily)'][key]['1.open']);
