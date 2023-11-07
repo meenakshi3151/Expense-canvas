@@ -7,6 +7,7 @@ import Navigation from './components/Navigation/Navigation'
 import { useState,useMemo } from "react"
 import Dashboard from "./components/Dashboard/Dashboard"
 import Income from "./components/Incomes/Income"
+import Stocks from "./components/StocksCryptos/Stocks/Stocks"
 import Expense from "./components/Expenses/Expenses"
 import Crypto from './components/StocksCryptos/Crypto'
 import { useGlobalContext } from "./context/globalContext"
@@ -28,6 +29,8 @@ function App(){
                 return <Expense/>
             case 7:
                 return <Crypto/>
+            case 8:
+                return <Stocks />
             default:  
                 return <Dashboard/>              
         }
