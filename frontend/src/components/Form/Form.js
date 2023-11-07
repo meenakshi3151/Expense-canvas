@@ -6,7 +6,7 @@ import { useGlobalContext } from "../../context/globalContext";
 import { plus } from "../../utils/icons";
 function Form(){
     // acessing the add income function using useGlobalContext() hook
-    const {addIncome}=useGlobalContext()
+    const {addIncome,getIncome}=useGlobalContext()
     const [inputState,setInputState]=useState({
         title:'',
         amount:'',
@@ -19,6 +19,7 @@ function Form(){
     //Taking the name of fields that has to be updated
     const handleInput=(name)=>e=>{
         setInputState({...inputState,[name]:e.target.value})
+        getIncome()
     }
 
     const handleSubmit=e=>{

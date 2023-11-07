@@ -30,3 +30,4 @@ export const circle = <i className="fa-solid fa-circle-dot"></i>
 export const group=<i className="fa-solid fa-user-group"></i>
 export const friend=<i className="fa-regular fa-user"></i>
 export const crypto=<i className="fa-solid fa-arrow-trend-up"></i>
+export const search=<i class="fa-solid fa-magnifying-glass"></i>
