@@ -9,7 +9,9 @@ function IncomeItem({
     category,
     description,
     indicatorColor,
-    type
+    type,
+    deleteItem,
+    totalIncome
 }){
 
     const categoryIcon=()=>{
@@ -18,7 +20,7 @@ function IncomeItem({
                 return money;
             case 'freelancing':
                 return freelance;    
-            case 'investment':
+            case 'investments':
                 return stocks;
             case 'stocks':
                 return users;
@@ -76,7 +78,7 @@ function IncomeItem({
                         </p>
                     </div>
                     <div className='btn-con'>
-                        <button>{trash}</button>
+                        <button onClick={()=>deleteItem(id)}>{trash}</button>
                     </div>
                 </div>
             </div>
