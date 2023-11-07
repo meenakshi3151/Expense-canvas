@@ -40,10 +40,10 @@ function Income(){
 
 const IncomeStyle=styled.div`
     display:flex;
-    oveflow:auto;
+    overflow:auto;
     .income-content{
         display:flex;
-        gap:2rem;{
+        gap:2rem;
         .incomes{
             flex:1;
         }
