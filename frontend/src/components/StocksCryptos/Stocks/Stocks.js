@@ -8,20 +8,20 @@ import Microsoft from "./StocksComponents/Microsoft";
 
 function Stocks() {
     return (
-    <InnerLayout>
-        <Header>
-            <Heading>
-                Stocks
-            </Heading>
-        </Header>
-        <Content>
-            <Amazon />
-            <Google />
-            <Facebook />
-            <Microsoft />
-            <Apple />
-        </Content>
-    </InnerLayout>
-    ) 
+        <InnerLayout>
+            <Header>
+                <Heading>
+                    Stocks
+                </Heading>
+            </Header>
+            <Content>
+                <Amazon />
+                <Google />
+                <Facebook />
+                <Microsoft />
+                <Apple />
+            </Content>
+        </InnerLayout>
+    )
 }
 export default Stocks;

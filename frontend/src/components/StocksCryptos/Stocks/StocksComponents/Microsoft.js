@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import styled, { keyframes } from 'styled-components';
+import React, { useEffect, useState ,useMemo,useCallback} from 'react'
 import Plot from 'react-plotly.js';
 import { InnerLayout } from '../../../../styles/Layout';
 
@@ -10,33 +9,34 @@ function Microsoft() {
     const [stockXValues, setstockXValues] = useState([]);
     const [stockYValues, setstockYValues] = useState([]);
     //continuous rendering
-    useEffect(() => {
+    // useEffect(() => {
 
-        const API_KEY = `Q570RIJ8BWRFI3OJ`
-        const StockSymbol = `AMZN`;
-        let stockXValuesFunction = [];
-        let stockYValuesFunction = [];
-        //Api key is called 
-        fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${StockSymbol}&outputsize=compact&apikey=${API_KEY}`)
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => {
-                console.log(data);
-                //dates on x axis
-                for (var key in data['Time Series (Daily']) {
-                    stockXValuesFunction.push(key);
-                    //opening price on y axis
-                    stockXValuesFunction.push(data['Time Series(Daily)'][key]['1.open']);
-                }
-                console.log(stockXValuesFunction)
-                setstockXValues(stockXValuesFunction);
-                setstockYValues(stockYValuesFunction);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    })
+    const API_KEY = `Q570RIJ8BWRFI3OJ`
+    const StockSymbol = `AMZN`;
+    useEffect(() => {
+      fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${StockSymbol}&outputsize=full&apikey=${API_KEY}`)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          const stockXValuesFunction = [];
+          const stockYValuesFunction = [];
+  
+          for (var key in data['Time Series (Daily)']) {
+            stockXValuesFunction.push(key);
+            stockYValuesFunction.push(data['Time Series(Daily)'][key]['1. open']);
+          }
+  
+          setstockXValues(stockXValuesFunction);
+          setstockYValues(stockYValuesFunction);
+          console.log(stockXValuesFunction);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }, [StockSymbol, API_KEY]);
+  //then returning the memoized values so that the api we can avoid multiple calls
+    const memoizedStockXValues = useMemo(() => stockXValues, [stockXValues]);
+    const memoizedStockYValues = useMemo(() => stockYValues, [stockYValues]);
     return (
 
         <InnerLayout>
@@ -45,8 +45,8 @@ function Microsoft() {
                 <Plot
                     data={[
                         {
-                            x: stockXValues,
-                            y: stockYValues,
+                            x:memoizedStockXValues,
+                            y: memoizedStockYValues,
                             type: 'scatter',
                             mode: 'lines+markers',
                             marker: { color: 'green' }
