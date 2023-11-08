@@ -11,6 +11,7 @@ function Microsoft() {
     //continuous rendering
     // useEffect(() => {
 
+<<<<<<< HEAD
     const API_KEY = `Q570RIJ8BWRFI3OJ`
     const StockSymbol = `AMZN`;
     useEffect(() => {
@@ -37,6 +38,33 @@ function Microsoft() {
   //then returning the memoized values so that the api we can avoid multiple calls
     const memoizedStockXValues = useMemo(() => stockXValues, [stockXValues]);
     const memoizedStockYValues = useMemo(() => stockYValues, [stockYValues]);
+=======
+        const API_KEY = `Q570RIJ8BWRFI3OJ`
+        const StockSymbol = `AMZN`;
+        let stockXValuesFunction = [];
+        let stockYValuesFunction = [];
+        //Api key is called 
+        fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${StockSymbol}&outputsize=compact&apikey=${API_KEY}`)
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                console.log(data);
+                //dates on x axis
+                for (var key in data['Time Series (Daily)']) {
+                    stockXValuesFunction.push(key);
+                    //opening price on y axis
+                    stockXValuesFunction.push(data['Time Series(Daily)'][key]['1.open']);
+                }
+                console.log(stockXValuesFunction)
+                setstockXValues(stockXValuesFunction);
+                setstockYValues(stockYValuesFunction);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    })
+>>>>>>> 16d6a2fa20111e2d22efcb03b61311d7993e6f85
     return (
 
         <InnerLayout>
