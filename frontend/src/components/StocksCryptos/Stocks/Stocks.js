@@ -13,6 +13,7 @@ function Stocks() {
                 <Heading>
                     Stocks
                 </Heading>
+
             </Header>
             <Content>
                 <Amazon />
