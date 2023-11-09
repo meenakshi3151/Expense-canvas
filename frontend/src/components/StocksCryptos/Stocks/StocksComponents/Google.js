@@ -57,7 +57,9 @@ function Google() {
       </Content>
     </InnerLayout>
 
+
   )
+
 }
 
 export default Google;

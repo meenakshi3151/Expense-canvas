@@ -12,6 +12,7 @@ function Apple() {
   const API_KEY = 'A4SE3ACM4LG72242';
   const StockSymbol = 'APPL';
 
+
   useEffect(() => {
     fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${StockSymbol}&outputsize=full&apikey=${API_KEY}`)
       .then((response) => response.json())
@@ -59,6 +60,7 @@ function Apple() {
     </InnerLayout>
 
   )
+
 }
 
 export default Apple;

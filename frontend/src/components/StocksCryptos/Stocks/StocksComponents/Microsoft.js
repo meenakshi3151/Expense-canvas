@@ -5,6 +5,7 @@ import { InnerLayout } from '../../../../styles/Layout';
 
 import { Content } from '../Stocks.style';
 function Microsoft() {
+
   //taking two variables and declaring as an empty list
   const [stockXValues, setstockXValues] = useState([]);
   const [stockYValues, setstockYValues] = useState([]);
@@ -63,6 +64,7 @@ function Microsoft() {
     </InnerLayout>
 
   )
+
 }
 
 export default Microsoft;
