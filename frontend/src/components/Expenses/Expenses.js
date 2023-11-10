@@ -1,17 +1,88 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { InnerLayout } from '../../styles/Layout';
-function Expense(){
+import { useGlobalContext } from '../../context/globalContext';
+import Form from '../Form/Form';
+import IncomeItem from '../IncomeItem/IncomeItem'
+import { dollar } from '../../utils/icons';
+import ExpenseForm from './ExpenseForm';
+function Expenses(){
+    const {addExpense,getExpense,expenses,deleteExpense,flag,totalExpense}=useGlobalContext()
+    useEffect(()=>{
+        getExpense()
+    },[])
+    // console.log('expense'+expenses);
     return(
         <ExpenseStyle>
             <InnerLayout>
-                Expense
-           </InnerLayout>
+                <h1>Expenses</h1>
+                <h2 className='totalIncome'>Total Expense: <span>{dollar}{totalExpense()}</span></h2>
+                <div className='income-content'>
+                    <div className='income-form'>
+                        <ExpenseForm/>
+                    </div>
+                    <div className='incomes'>
+                        {expenses.map((expense)=>{
+                            const {_id,title,amount,date,category,description,type}=expense;
+                            return <IncomeItem
+                                key={_id}
+                                id={_id}
+                                title={title}
+                                description={description}
+                                amount={amount}
+                                date={date}
+                                category={category}
+                                indicatorColor="var(--color-red)"
+                                deleteItem={deleteExpense}
+                                type={type}
+                            />
+                        })}
+                    </div>
+                </div>
+            </InnerLayout>
         </ExpenseStyle>
     )
 }
 
 const ExpenseStyle=styled.div`
+    display:flex;
+    oveflow:auto;
+    flex-direction:row;
     
+    .totalIncome{
+        //this is the top bar 
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background:#FCF6F9;
+        border: 2px solid #FFFFFF;
+        border:solid;
+        box-shadow:0px 1px 15px rgba(0,0,0,0.06);
+        border-radius:20px;
+        padding:1rem;
+        margin:1rem 0;
+        width:90%;
+        font-size:2rem;
+        gap:0.5rem;
+        span{
+            font-size:2.5rem;
+            font-weight:2rem;
+            color:var(--color-red);
+        }
+    }
+    .income-content{
+        display: flex;
+        flex-direction :row;
+        
+        gap: 2rem;
+        .incomes{
+            flex: 1;
+        }
+    }
+
 `;
-export default Expense
+export default Expenses
+
+
+
+

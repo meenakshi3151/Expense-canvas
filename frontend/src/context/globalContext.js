@@ -25,6 +25,7 @@ export const GlobalProvider=({children})=>{
     //Get the data from database 
     const getIncome=async()=>{
         const response=await axios.get(`${BASE_URL}getIncomes`)
+        console.log('response'+response)
         setIncomes(response.data)
         console.log(response.data)
     }
@@ -42,7 +43,51 @@ export const GlobalProvider=({children})=>{
         })
         return totalIncome;
     }
-    console.log(totalIncome());
+    // console.log(totalIncome());
+
+    //---->>>> EXPENSE
+
+
+    const addExpense= async(expense)=>{
+        
+        const response=await axios.post(`${BASE_URL}addExpenses`,expense)
+        .catch((err)=>{
+            setError(err.response.data.message)
+        })
+        getExpense();
+    }
+
+    const getExpense=async()=>{
+        const response=await axios.get(`${BASE_URL}getExpenses`)
+        setExpenses(response.data)
+        console.log(response.data)
+    }
+    
+    //Deleting the Expense
+    const deleteExpense=async(id)=>{
+        const res=await axios.delete(`${BASE_URL}deleteExpense/${id}`)
+        getExpense();
+    }
+    // calculating the Total Expense
+    const totalExpense=()=>{
+        let totalExpense=0;
+        expenses.forEach((expense)=>{
+            totalExpense+=expense.amount;
+        })
+        return totalExpense;
+    }
+    //Calculating the total Balance
+    const totalBalance=()=>{
+        return totalIncome()-totalExpense();
+    }
+    const transactionHistory=()=>{
+        const history=[...incomes,...expenses]
+        history.sort((a,b)=>{
+            return new Date(b.createdAt)-new Date(a.createdAt);
+        })
+        return history.slice(0,3);
+    }
+
     return(
         //Providing the context to child components
         //providing the addIncome data to all the child components
@@ -51,7 +96,16 @@ export const GlobalProvider=({children})=>{
             getIncome,
             incomes,
             deleteIncome,
-            totalIncome
+            totalIncome,
+            addExpense,
+            getExpense,
+            deleteExpense,
+            totalExpense,
+            expenses,
+            totalBalance,
+            transactionHistory,
+            error,
+            setError
         }}>
             {children}
         </GlobalContext.Provider>

@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
-import { dollar,calender,comment ,trash,money, freelance, stocks, users, card, bitcoin, yt, piggy, book, food, medical, tv, takeaway, clothing, circle} from '../../utils/icons';
+import { dollar,calender,comment ,trash,money, freelance, stocks, users, card, bitcoin, yt, piggy, book, food, medical, tv, takeaway, clothing, circle, travel} from '../../utils/icons';
+import { dateFormat } from '../../utils/dateFormat';
 function IncomeItem({
     id,
     title,
@@ -15,6 +16,7 @@ function IncomeItem({
 }){
 
     const categoryIcon=()=>{
+        console.log('hello duniya');
         switch(category){
             case 'salary':
                 return money;
@@ -38,6 +40,7 @@ function IncomeItem({
     }
 
     const expenseIcon = () => {
+        console.log('hello world');
         switch (category) {
             case 'education':
                 return book;
@@ -52,11 +55,11 @@ function IncomeItem({
             case 'clothing':
                 return clothing;
             case 'travelling':
-                return freelance;
+                return travel;
             case 'other':
                 return circle;
             default:
-                return ''
+                return '';
         }
     }
 
@@ -64,15 +67,18 @@ function IncomeItem({
 
     return(
         <IncomeItemStyle indicator={indicatorColor}>
+            
             <div className='icon'>
                 {type==='expense'?expenseIcon() :categoryIcon()}
+               
             </div>
+            
             <div className='content'>
                 <h5>{title}</h5>
                 <div className='inner-content'>
                     <div className='text'>
                         <p>{dollar} {amount}</p>
-                        <p>{calender} {date}</p>
+                        <p>{calender} {dateFormat(date)}</p>
                         <p>
                             {comment} {description}
                         </p>
@@ -95,7 +101,7 @@ margin-bottom: 1rem;
 display: flex;
 align-items: center;
 gap: 1rem;
-width: 100%;
+width: 105%;
 color: #222260;
 .icon{
     width: 60px;
@@ -153,3 +159,6 @@ color: #222260;
 }
 `
 export default IncomeItem;
+
+
+
