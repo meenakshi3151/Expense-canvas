@@ -48,7 +48,7 @@ const IncomeStyle=styled.div`
     display:flex;
     overflow:auto;
     flex-direction:row;
-    
+    width:100%;
     .totalIncome{
         //this is the top bar 
         display:flex;
@@ -61,7 +61,7 @@ const IncomeStyle=styled.div`
         border-radius:20px;
         padding:1rem;
         margin:1rem 0;
-        width:125%;
+        width:100%;
         font-size:2rem;
         gap:0.5rem;
         span{

@@ -25,7 +25,7 @@ function Microsoft() {
 
         for (var key in data['Time Series (Daily)']) {
           stockXValuesFunction.push(key);
-          stockYValuesFunction.push(data['Time Series(Daily)'][key]['1.open']);
+          stockYValuesFunction.push(data['Time Series (Daily)'][key]['1. open']);
         }
 
         setstockXValues(stockXValuesFunction);

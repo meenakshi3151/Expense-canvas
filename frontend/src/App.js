@@ -11,6 +11,7 @@ import Stocks from "./components/StocksCryptos/Stocks/Stocks"
 import Expense from "./components/Expenses/Expenses"
 import Crypto from './components/StocksCryptos/Crypto'
 import { useGlobalContext } from "./context/globalContext"
+import Bills from "./components/Bills/Bills"
 import { useThemeContext } from "./context/ThemeContext";
 
 function App(){
@@ -34,6 +35,8 @@ function App(){
                 return <Crypto/>
             case 8:
                 return <Stocks />
+            case 9:
+                return <Bills/>
             default:  
                 return <Dashboard/>              
         }

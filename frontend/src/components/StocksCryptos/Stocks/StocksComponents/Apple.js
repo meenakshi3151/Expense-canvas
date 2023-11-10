@@ -9,8 +9,10 @@ function Apple() {
   const [stockXValues, setstockXValues] = useState([]);
   const [stockYValues, setstockYValues] = useState([]);
   //continuous rendering
-  const API_KEY = 'A4SE3ACM4LG72242';
-  const StockSymbol = 'APPL';
+  // const API_KEY = 'A4SE3ACM4LG72242';
+  const API_KEY = 'OC5U1P7YJH0QZRNY';
+  
+  const StockSymbol = 'AAPL';
 
 
   useEffect(() => {

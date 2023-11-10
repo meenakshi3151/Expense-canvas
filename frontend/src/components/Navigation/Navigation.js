@@ -15,7 +15,7 @@ function Navigation({active,setActive}){
                         className={active===item.id ? 'active':''}
                     >
                         {item.icon}
-                        <sapn>{item.title}</sapn>
+                        <span>{item.title}</span>
                     </li>
                 })}
             </ul>
@@ -41,7 +41,7 @@ const NavStyled=styled.nav`
     
     .menu-items{
         margin-top:60px;
-        fleax:1;
+        flex:1;
         display:flex;
         flex-direction:column;
         
