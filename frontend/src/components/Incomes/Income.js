@@ -46,7 +46,7 @@ function Income(){
 const IncomeStyle=styled.div`
 
     display:flex;
-    oveflow:auto;
+    overflow:auto;
     flex-direction:row;
     
     .totalIncome{
