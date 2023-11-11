@@ -67,6 +67,7 @@ function ExpenseForm(){
                     selected={date}
                     dateFormat="dd/MM/yyyy"
                     onChange={(date)=>{
+                        
                         setInputState({...inputState,date:date})
                     }}
                 />

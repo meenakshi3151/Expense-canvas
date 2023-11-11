@@ -33,3 +33,11 @@ export const crypto=<i className="fa-solid fa-arrow-trend-up"></i>
 export const search=<i class="fa-solid fa-magnifying-glass"></i>
 export const travel =<i class="fa-solid fa-plane"></i>
 export const bills=<i class="fa-solid fa-money-bill-transfer"></i>
+export const electricity_bill=<i class="fa-solid fa-plug"></i>
+export const car_bill=<i class="fa-solid fa-car"></i>
+export const Internet_bill=<i class="fa-solid fa-wifi"></i>
+export const Phone_Bill=<i class="fa-solid fa-phone"></i>
+export const Loan_Bill=<i class="fa-solid fa-landmark"></i>
+export const Education_Bill=<i class="fa-solid fa-laptop-file"></i>
+export const Medical_Bill=<i class="fa-solid fa-suitcase-medical"></i>
+export const paid=<i class="fa-solid fa-check"></i>
