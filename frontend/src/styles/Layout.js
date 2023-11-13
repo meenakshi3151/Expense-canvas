@@ -3,7 +3,7 @@ export const MainLayout=styled.div`
     padding:2rem;
     height:100%;
     display:flex;
-    
+    width:100%;
     gap:2rem;
 `;
 

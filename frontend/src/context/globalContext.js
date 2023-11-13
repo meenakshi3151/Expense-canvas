@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useContext } from "react";
-const BASE_URL="http://localhost:5000/api/v1/";
+const BASE_URL="http://localhost:5000/api/user/";
 /* 
     To avoid passing the props multiple times we are using Context,
     which is used to share data and state across multiple components
@@ -11,6 +11,7 @@ export const GlobalProvider=({children})=>{
 
     const [incomes,setIncomes]=useState([])
     const [expenses,setExpenses]=useState([])
+    const [bill,setBill]=useState([]);
     const [error,setError]=useState(null)
     //adding the incomes in  databases
     //this function is responsible for posting the data to database
@@ -88,6 +89,26 @@ export const GlobalProvider=({children})=>{
         return history.slice(0,3);
     }
 
+    const addBill= async(bill)=>{
+        
+        const response=await axios.post(`${BASE_URL}addBill`,bill)
+        .catch((err)=>{
+            setError(err.response.data.message)
+        })
+        getBill();
+    }
+
+
+    const getBill=async()=>{
+        const response=await axios.get(`${BASE_URL}getBills`)
+        setBill(response.data);
+    }
+
+    const deleteBill=async(id)=>{
+        const response=await axios.delete(`${BASE_URL}deleteBill/${id}`)
+        getBill();
+    }
+
     return(
         //Providing the context to child components
         //providing the addIncome data to all the child components
@@ -105,7 +126,11 @@ export const GlobalProvider=({children})=>{
             totalBalance,
             transactionHistory,
             error,
-            setError
+            setError,
+            bill,
+            getBill,
+            addBill,
+            deleteBill
         }}>
             {children}
         </GlobalContext.Provider>

@@ -48,7 +48,7 @@ const ExpenseStyle=styled.div`
     display:flex;
     oveflow:auto;
     flex-direction:row;
-    width:100%;
+    width:110%;
     .totalIncome{
         //this is the top bar 
         display:flex;

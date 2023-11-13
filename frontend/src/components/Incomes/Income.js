@@ -48,7 +48,7 @@ const IncomeStyle=styled.div`
     display:flex;
     overflow:auto;
     flex-direction:row;
-    width:100%;
+    width:110%;
     .totalIncome{
         //this is the top bar 
         display:flex;

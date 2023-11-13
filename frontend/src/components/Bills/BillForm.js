@@ -4,36 +4,34 @@ import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
 import { useGlobalContext } from "../../context/globalContext";
 import { plus } from "../../utils/icons";
-function Form(){
+function BillsForm(){
     // acessing the add income function using useGlobalContext() hook
-    const {addIncome,getIncome,error,setError}=useGlobalContext()
+    const {addBill,getBill,error,setError}=useGlobalContext()
+    const currentDate=new Date();
     const [inputState,setInputState]=useState({
         title:'',
         amount:'',
         date:'',
         category:'',
-        description:'',
     })
-    const {title,amount,date,category,description}=inputState;
+    const {title,amount,date,category}=inputState;
     //updating the Input Fields
     //Taking the name of fields that has to be updated
     const handleInput=(name)=>e=>{
         setError('')
         setInputState({...inputState,[name]:e.target.value})
-        getIncome()
+        getBill()
     }
 
     const handleSubmit=e=>{
         e.preventDefault();
-        addIncome(inputState)
+        addBill(inputState)
         setInputState({
             title:'',
             amount:'',
             date:'',
-            category:'',
-            description:'',
-        })
-        
+            category:''
+        })    
     }
 
     return(
@@ -46,7 +44,7 @@ function Form(){
                     type="text"
                     value={title}
                     name={'title'}
-                    placeholder="Salary Title"
+                    placeholder="Bill Title"
                     onChange={handleInput('title')}
                 />
             </div>
@@ -55,19 +53,22 @@ function Form(){
                     type="text"
                     value={amount}
                     name={'amount'}
-                    placeholder="Salary Amount"
+                    placeholder="Bill Amount"
                     onChange={handleInput('amount')}
                 />
             </div>
             <div className="input">
                  <DatePicker 
                     id='date'
-                    placeholderText='Enter a Date'
+                    placeholderText='Enter a Due Date'
                     selected={date}
                     dateFormat="dd/MM/yyyy"
                     onChange={(date)=>{
-                        console.log('date'+date)
-                        setInputState({...inputState,date:date})
+                        // console.log('date'+date)
+                        if(date>currentDate){
+                            setInputState({...inputState,date:date})
+                        }
+                        
                     }}
                 />
                
@@ -75,17 +76,17 @@ function Form(){
             <div className="selects input-control">
                 <select required value={category} name="category" id="category" onChange={handleInput('category')}>
                     <option value=""  disabled >Select Option</option>
-                    <option value="salary">Salary</option>
-                    <option value="freelancing">Freelancing</option>
-                    <option value="investments">Investments</option>
-                    <option value="stocks">Stocks</option>
-                    <option value="bitcoin">Bitcoin</option>
-                    <option value="bank">Bank Transfer</option>  
-                    <option value="youtube">Youtube</option>  
+                    <option value="electricity_bill">Electricity Bill</option>
+                    <option value="car_bill">Car Bill</option>
+                    <option value="Internet_bill">Internet Bill</option>
+                    <option value="Phone_bill">Phone Bill</option>
+                    <option value="Loan_bill">Loan Bill</option>
+                    <option value="Education_bill">Education Bill</option>  
+                    <option value="Medical_bill">Medical Bill</option>  
                     <option value="other">Other</option>  
                 </select>
             </div> 
-            <div className="input-control">
+            {/* <div className="input-control">
                 <textarea 
                     name="description" 
                     value={description} 
@@ -95,9 +96,9 @@ function Form(){
                     rows="4" 
                     onChange={handleInput('description')}
                 ></textarea>
-            </div>
+            </div> */}
             <div className="submit-btn">
-                <button><span>{plus}</span> Add Income</button>
+                <button><span>{plus}</span> Add Bill</button>
             </div>
         </FormStyle>
     )
@@ -107,7 +108,6 @@ const FormStyle=styled.form`
     display:flex;
     flex-direction:column;
     gap:2rem;
-   
     input,textarea,select{
         font-family:inherit;
         font-size:inherit;
@@ -141,4 +141,4 @@ const FormStyle=styled.form`
     }
 
 `
-export default Form
+export default BillsForm
