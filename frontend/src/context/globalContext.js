@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useContext } from "react";
-const BASE_URL="http://localhost:5000/api/v1/";
+const BASE_URL="http://localhost:5000/api/user/";
 /* 
     To avoid passing the props multiple times we are using Context,
     which is used to share data and state across multiple components
