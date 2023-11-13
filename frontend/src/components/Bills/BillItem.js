@@ -215,6 +215,8 @@ color: #222260;
             }
         }
     }
+    
 }
+
 `
 export default BillItem

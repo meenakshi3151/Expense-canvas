@@ -8,7 +8,7 @@ const History=()=>{
     const [...history]=transactionHistory();
     return (
         <HistoryStyle>
-            <h2>Recent History</h2>
+            <h2 className="header">Recent History</h2>
             {history.map((item)=>{
                 const {_id,title,amount,type}=item
                 return(
@@ -28,6 +28,9 @@ const History=()=>{
 }
 
 const HistoryStyle=styled.div`
+.header{
+    font-size:24px;
+}
     display:flex;
     flex-direction:column;
     gap:1rem;

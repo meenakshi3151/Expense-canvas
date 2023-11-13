@@ -43,8 +43,7 @@ function Apple() {
 
 
     <InnerLayout>
-  <Header>x-value:{memoizedStockXValues}</Header>
-                <Header>y-values:{memoizedStockYValues}</Header>
+ 
       <Content>
         <Plot
           data={[
