@@ -14,7 +14,7 @@ const billSchema=new mongoose.Schema({
     },
     type:{
         type:String,
-        default:"income"
+        default:"bill"
     },
     date:{
         type:Date,
