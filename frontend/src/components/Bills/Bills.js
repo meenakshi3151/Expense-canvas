@@ -1,7 +1,11 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { InnerLayout } from "../../styles/Layout";
+<<<<<<< HEAD
 import BillsForm from "./BillForm";
+=======
+import BillsForm from "./BillsForm";
+>>>>>>> a459a4c335e985db158ba85bf397aa465816aaf2
 import IncomeItem from "../IncomeItem/IncomeItem";
 import BillItem from "./BillItem";
 import { useGlobalContext } from "../../context/globalContext";
@@ -20,11 +24,19 @@ function Bills(){
                     </div>
                     <div className="content">
                         {bill
+<<<<<<< HEAD
                             // .filter((bills) => {
                             // const currentDate = new Date();
                             // const billDate = new Date(bills.date);
                             // return billDate > currentDate;
                             // })
+=======
+                            .filter((bills) => {
+                            const currentDate = new Date();
+                            const billDate = new Date(bills.date);
+                            return billDate > currentDate;
+                            })
+>>>>>>> a459a4c335e985db158ba85bf397aa465816aaf2
                             .map((bills) => {
                             const { _id, title, amount, date, category } = bills;
                             return (

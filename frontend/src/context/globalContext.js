@@ -109,6 +109,13 @@ export const GlobalProvider=({children})=>{
         getBill();
     }
 
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> a459a4c335e985db158ba85bf397aa465816aaf2
     return(
         //Providing the context to child components
         //providing the addIncome data to all the child components

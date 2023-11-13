@@ -13,7 +13,10 @@ import Crypto from '../StocksCryptos/Crypto'
 import { useGlobalContext } from '../../context/globalContext'
 import Bills from "../Bills/Bills"
 import { useThemeContext } from "../../context/ThemeContext";
+<<<<<<< HEAD
 import { ToastContainer } from 'react-toastify';
+=======
+>>>>>>> a459a4c335e985db158ba85bf397aa465816aaf2
 
 function App(){
     const [active,setActive]=useState(1);
@@ -60,9 +63,13 @@ function App(){
                 <main>
                     {displayData()}
                 </main>
+<<<<<<< HEAD
                
             </MainLayout>
             <ToastContainer autoClose={3000} position="top-right" />
+=======
+            </MainLayout>
+>>>>>>> a459a4c335e985db158ba85bf397aa465816aaf2
         </AppStyled>
     )
 }

@@ -3,8 +3,12 @@ import styled from "styled-components";
 import { useGlobalContext } from "../../context/globalContext";
 import { dateFormat } from "../../utils/dateFormat";
 import { Education_Bill, Internet_bill, Loan_Bill, Medical_Bill, Phone_Bill, calender, car_bill, circle, dollar, electricity_bill, medical, trash } from "../../utils/icons";
+<<<<<<< HEAD
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+=======
+
+>>>>>>> a459a4c335e985db158ba85bf397aa465816aaf2
 function BillItem({id,key,title,amount,date,category,type,deleteItem}){
     // const {bill}=useGlobalContext();
     // console.log('bill:'+bill);
@@ -50,11 +54,16 @@ function BillItem({id,key,title,amount,date,category,type,deleteItem}){
         const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+<<<<<<< HEAD
        if(days<3 && days>=0){
         toast.warning("Your bill is due in less than 3 days");
        }
        else if(days<0){
         toast.warning("Your bill is OverDue");
+=======
+       if(days<3){
+        alert("Your bill is due in less than 3 days")
+>>>>>>> a459a4c335e985db158ba85bf397aa465816aaf2
        }
       },[date,title])
     
@@ -102,7 +111,10 @@ function BillItem({id,key,title,amount,date,category,type,deleteItem}){
                         <button onClick={() => {
                             setButtonText("Done");
                             setColor("green");
+<<<<<<< HEAD
                             toast.success('Bill marked as paid.');
+=======
+>>>>>>> a459a4c335e985db158ba85bf397aa465816aaf2
                             }}>
                             {buttonText}
                             </button>
@@ -110,6 +122,7 @@ function BillItem({id,key,title,amount,date,category,type,deleteItem}){
                         
                     </div>
                     <div className='btn-con'>
+<<<<<<< HEAD
                        
                            <button onClick={() => {
                             if (buttonText === 'Done') {
@@ -119,6 +132,12 @@ function BillItem({id,key,title,amount,date,category,type,deleteItem}){
                               toast.warning('Your bill is still pending.');
                             }
                           }}>{trash}
+=======
+                        <button onClick={()=>
+                            {if(buttonText==="Done"){deleteItem(id)}
+                            if(buttonText==='Pending'){alert("Your Bill is pending")}}}
+                            >{trash}
+>>>>>>> a459a4c335e985db158ba85bf397aa465816aaf2
                         </button>
                     </div>
                 </div>
