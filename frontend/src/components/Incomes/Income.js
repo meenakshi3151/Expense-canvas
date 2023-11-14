@@ -14,7 +14,10 @@ function Income(){
     return(
         <IncomeStyle>
             <InnerLayout>
-                <h1>Incomes</h1>
+                
+                <h1 className='header'>Incomes</h1>
+                
+                
                 <h2 className='totalIncome'>Total Income: <span>{dollar}{totalIncome()}</span></h2>
                 <div className='income-content'>
                     <div className='income-form'>
@@ -48,7 +51,11 @@ const IncomeStyle=styled.div`
     display:flex;
     overflow:auto;
     flex-direction:row;
-    width:110%;
+    width:105%;
+    .header{
+        font-weight:bold;
+        font-size:36px;
+    }
     .totalIncome{
         //this is the top bar 
         display:flex;
@@ -61,7 +68,7 @@ const IncomeStyle=styled.div`
         border-radius:20px;
         padding:1rem;
         margin:1rem 0;
-        width:100%;
+        width:90%;
         font-size:2rem;
         gap:0.5rem;
         span{
@@ -70,15 +77,21 @@ const IncomeStyle=styled.div`
             color:var(--color-green);
         }
     }
-    .income-content{
+   
+    .income-content {
         display: flex;
-        flex-direction :row;
-        
+        flex-direction: column;
         gap: 2rem;
-        .incomes{
-            flex: 1;
+        .income-form {
+            margin-right: 70px; /* Adjust the margin to increase the distance */
         }
-    }
+      }
+    
+      @media (min-width: 1300px) {
+        .income-content {
+          flex-direction: row;
+        }
+      }
 
 `;
 export default Income

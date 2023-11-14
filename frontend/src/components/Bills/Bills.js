@@ -80,13 +80,18 @@ width:100%;
 }
 .inner-content{
     display: flex;
-    flex-direction :row;
+    flex-direction :column;
     
     gap: 2rem;
     .content{
         flex: 1;
     }
 }
+@media (min-width: 1069px) {
+    .inner-content {
+      flex-direction: row;
+    }
+  }
 
 
 `

@@ -16,7 +16,7 @@ function Dashboard(){
     return(
         <DashboardStyle>
            <InnerLayout>
-                <h1>All transactions</h1>
+                <h1 className='header'>All transactions</h1>
                 <div className='stats'>
                     <div className='chart-Container'>
                         <Chart/>
@@ -71,6 +71,10 @@ function Dashboard(){
 }
 
 const DashboardStyle=styled.div`
+.header{
+    font-weight:bold;
+    font-size:36px;
+}
 .stats{
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -86,34 +90,48 @@ const DashboardStyle=styled.div`
             .income, .expense{
                 grid-column: span 2;
             }
-            .income, .expense, .balance{
+            .income, .balance{
                 background: #FCF6F9;
                 border: 2px solid #FFFFFF;
                 box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
                 border-radius: 20px;
                 padding: 1rem;
                 p{
-                    font-size: 3.5rem;
+                    color:green;
+                    font-size: 3.0rem;
                     font-weight: 700;
                 }
             }
-
+            .expense{
+                background: #FCF6F9;
+                border: 2px solid #FFFFFF;
+                box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
+                border-radius: 20px;
+                padding: 1rem;
+                p{
+                    color:red;
+                    font-size: 3.0rem;
+                    font-weight: 700;
+                }
+            }
             .balance{
                 grid-column: 2 / 4;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
+                color:red;
                 align-items: center;
                 // p{
                 //     color: var(--color-green);
                 //     opacity: 0.6;
-                //     font-size: 4.5rem;
+                //     font-size: 2.5rem;
                 // }
             }
         }
     }
 
     .historyContainer{
+        margin-left:60px;
         grid-column: 4 / -1;
         // width:800px;
         h2{
@@ -144,5 +162,11 @@ const DashboardStyle=styled.div`
         }
     }
 }
+
+@media (max-width: 900px) {
+    .stats {
+      flex-direction: column;
+    }
+  }
 `;
 export default Dashboard

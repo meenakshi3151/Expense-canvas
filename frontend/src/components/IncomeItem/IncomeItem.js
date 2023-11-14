@@ -101,7 +101,7 @@ margin-bottom: 1rem;
 display: flex;
 align-items: center;
 gap: 1rem;
-width: 105%;
+width: 115%;
 color: #222260;
 .icon{
     width: 60px;
@@ -149,7 +149,7 @@ color: #222260;
         .text{
             display: flex;
             align-items: center;
-            gap: 1.5rem;
+            gap: 1.3rem;
             p{
                 display: flex;
                 align-items: center;
