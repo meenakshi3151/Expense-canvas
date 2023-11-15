@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { menuItems } from "../../utils/menuItems";
 import styled from 'styled-components'
-function Navigation({active,setActive}){
+import { dark ,light} from "../../utils/icons";
+function Navigation({active,setActive,toggleTheme,isDarkTheme}){
+    const [themeIcon, setThemeIcon] = useState(dark);
+    const [borderColor, setBorderColor] = useState('#333');
+    const handleToggleTheme = () => {
+        // Toggle the theme
+        // setThemeIcon((prevIcon) => (prevIcon === dark ? light : dark)); // Update the icon dynamically
+        setThemeIcon((prevIcon) => (prevIcon === dark ? light : dark))
+        setBorderColor((prevColor) => (prevColor === '#333' ? '#fff' : '#333'));
+        toggleTheme();
+    };
     return (
-        <NavStyled>
+        <NavStyled isDarkTheme={isDarkTheme} borderColor={borderColor}>
             
             <ul className="menu-items">
+            <button onClick={handleToggleTheme }>{themeIcon}<span></span><span></span>Toggle</button>
                 {menuItems.map((item)=>{
                     return <li
                         key={item.id}
@@ -31,7 +42,7 @@ const NavStyled=styled.nav`
     width:274px;
     height:100%;
     background:rgba(252,246,249,0.78);
-    border:3px solid #FFFFFF;
+    border: 3px solid ${(props) => props.borderColor};
     backdrop-filter:blur(4.5px);
     border-radius:32px;
     display:flex;
@@ -44,6 +55,7 @@ const NavStyled=styled.nav`
         flex:1;
         display:flex;
         flex-direction:column;
+        // border:solid;
         
         
         li{
@@ -62,6 +74,11 @@ const NavStyled=styled.nav`
                 font-size:1.4 rem;
                 transition:all .4s ease-in-out;
             }
+        }
+        button{
+           align-item:left;
+           margin-left:-150px;
+           font-weight:bold;
         }
     }
     .active{

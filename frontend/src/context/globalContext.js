@@ -12,6 +12,7 @@ export const GlobalProvider=({children})=>{
     const [incomes,setIncomes]=useState([])
     const [expenses,setExpenses]=useState([])
     const [bill,setBill]=useState([]);
+    const [user, setUser] = useState(null); 
     const [error,setError]=useState(null)
     //adding the incomes in  databases
     //this function is responsible for posting the data to database
@@ -109,7 +110,15 @@ export const GlobalProvider=({children})=>{
         getBill();
     }
 
-
+    const loginUser = async (userData) => {
+        try {
+          const response = await axios.post(`${BASE_URL}login`, userData);
+          setUser(response.data.user);
+          // You might want to store the user token or other relevant information in localStorage here
+        } catch (error) {
+          setError(error.response.data.message);
+        }
+    };
 
 
 
@@ -136,7 +145,9 @@ export const GlobalProvider=({children})=>{
             bill,
             getBill,
             addBill,
-            deleteBill
+            deleteBill,
+            user,
+            loginUser
         }}>
             {children}
         </GlobalContext.Provider>

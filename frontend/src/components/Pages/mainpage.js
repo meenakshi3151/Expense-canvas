@@ -17,9 +17,10 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App(){
+    const {toggleTheme,isDarkTheme}=useThemeContext();
     const [active,setActive]=useState(1);
     const use=useGlobalContext();
-    
+    const [borderColor,setBorderColor]=useState('#333');
     console.log(use);
     const displayData=()=>{
         switch(active){
@@ -52,12 +53,12 @@ function App(){
     },[])
        
     return(
-        <AppStyled bg={bg} >
+        <AppStyled bg={bg} isDarkTheme={isDarkTheme}>
             
             {animationMemo}
             
             <MainLayout >
-                <Navigation active={active} setActive={setActive}/>
+                <Navigation active={active} setActive={setActive} toggleTheme={toggleTheme}/>
                 <main>
                     {displayData()}
                 </main>
@@ -70,14 +71,14 @@ function App(){
  
 const AppStyled=styled.div`
     height:100vh;
-    background-image :url(${props=>props.bg});
+    background-color :${(props) => (props.isDarkTheme ? '#333' : '#fff')}; 
     position:relative;
     main{
         flex:1;
         display:flex;
         flex-direction:row;
         background:rgba(252,246,249,0.78);
-        border:3px solid #FFFFFF;
+        border:3px solid ${(props) => (props.isDarkTheme ? '#fff' : '#333')}; 
         backdrop-filter:blur(4.5px);
         border-radius:32px;
         overflow:auto;

@@ -61,17 +61,22 @@ function ExpenseForm(){
                 />
             </div>
             <div className="input">
-                 <DatePicker 
-                    id='date'
-                    placeholderText='Enter a Date'
-                    selected={date}
-                    dateFormat="dd/MM/yyyy"
-                    onChange={(date)=>{
-                        
-                        setInputState({...inputState,date:date})
-                    }}
+            <DatePicker
+                id='date'
+                placeholderText='Enter a Date'
+                selected={date}
+                dateFormat="dd/MM/yyyy"
+                onChange={(selectedDate) => {
+                    const currentDate = new Date();
+                    if (selectedDate > currentDate) {
+                    setError('Please select a date in the past or today.');
+                    } else {
+                    setInputState({ ...inputState, date: selectedDate });
+                    setError('');
+                    }
+                }}
                 />
-               
+                            
             </div>
             <div className="selects input-control">
                 <select required value={category} name="category" id="category" onChange={handleInput('category')}>

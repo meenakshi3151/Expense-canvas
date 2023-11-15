@@ -71,6 +71,7 @@ function Dashboard(){
 }
 
 const DashboardStyle=styled.div`
+
 .header{
     font-weight:bold;
     font-size:36px;

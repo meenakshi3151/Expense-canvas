@@ -66,8 +66,14 @@ function Form(){
                     selected={date}
                     dateFormat="dd/MM/yyyy"
                     onChange={(date)=>{
-                        console.log('date'+date)
-                        setInputState({...inputState,date:date})
+                        const currentDate=new Date();
+                        if(date>currentDate){
+                            setError('Please select a date in the past or today');
+                        }else{
+                            console.log('date'+date)
+                            setInputState({...inputState,date:date})
+                        }
+                       
                     }}
                 />
                

@@ -41,3 +41,5 @@ export const Loan_Bill=<i class="fa-solid fa-landmark"></i>
 export const Education_Bill=<i class="fa-solid fa-laptop-file"></i>
 export const Medical_Bill=<i class="fa-solid fa-suitcase-medical"></i>
 export const paid=<i class="fa-solid fa-check"></i>
+export const dark=<i class="fa-solid fa-moon"></i>
+export const light=<i class="fa-solid fa-sun"></i>
