@@ -23,7 +23,7 @@ function Expenses(){
                     </div>
                     <div className='incomes'>
                         {expenses.map((expense)=>{
-                            const {_id,title,amount,date,category,description,type}=expense;
+                            const {_id,title,amount,date,category,description,type,file}=expense;
                             return <IncomeItem
                                 key={_id}
                                 id={_id}
@@ -35,6 +35,7 @@ function Expenses(){
                                 indicatorColor="var(--color-red)"
                                 deleteItem={deleteExpense}
                                 type={type}
+                                file={file}
                             />
                         })}
                     </div>
@@ -46,7 +47,7 @@ function Expenses(){
 
 const ExpenseStyle=styled.div`
     display:flex;
-    oveflow:auto;
+    overflow:auto;
     flex-direction:row;
     width:90%;
     .header{
