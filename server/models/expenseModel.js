@@ -26,22 +26,15 @@ const ExpenseSchema=new mongoose.Schema({
         required:true,
         trim:true
     },
-    amount:{
-        type:Number,
-        required:true,
-        maxLenght:20,
-        trim:true
-    },
-    category:{
-        type:String,
-        required:true,
-        maxLenght:20,
-        trim:true
-    },
     description:{
         type:String,
         required:true,
         trim:true
+    },
+    file:{
+       filePath: String,
+       fileSize: Number,
+       fileName: String
     }
     
 },{timestamps:true})

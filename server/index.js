@@ -6,7 +6,8 @@ const userRoutes = require('./routes/userRoutes');
 const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 const cors = require('cors'); // Import the 'cors' middleware
 const fs=require('fs')
-const chatRoutes = require("./routes/chatRoutes")
+const chatRoutes = require("./routes/chatRoutes");
+
 
 
 dotenv.config();

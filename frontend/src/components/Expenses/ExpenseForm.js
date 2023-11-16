@@ -5,7 +5,11 @@ import "react-datepicker/dist/react-datepicker.css"
 import { useGlobalContext } from "../../context/globalContext";
 import { plus } from "../../utils/icons";
 function ExpenseForm(){
+    //function to handle the file change
+    // const [file, setFile] = useState(null);
+
     // acessing the add income function using useGlobalContext() hook
+
     const {addExpense,getExpense,error,setError}=useGlobalContext()
     const [inputState,setInputState]=useState({
         title:'',
@@ -13,6 +17,7 @@ function ExpenseForm(){
         date:'',
         category:'',
         description:'',
+        file:null
     })
     const {title,amount,date,category,description}=inputState;
     //updating the Input Fields
@@ -22,7 +27,11 @@ function ExpenseForm(){
         setInputState({...inputState,[name]:e.target.value})
         getExpense()
     }
-
+const [file,setFile]=useState(null);
+    const handleFileChange = (e) => {
+        const selectedFile = e.target.files[0];
+        setFile(selectedFile);
+    };
     const handleSubmit=e=>{
         e.preventDefault();
         addExpense(inputState)
@@ -33,12 +42,13 @@ function ExpenseForm(){
             date:'',
             category:'',
             description:'',
+           file:null,
         })
         
     }
 
     return(
-        <ExpenseFormStyle onSubmit={handleSubmit} >
+        <ExpenseFormStyle onSubmit={handleSubmit} encType="multipart/form-data" >
             {error && <p className="error">
                     {error}
                 </p>}
@@ -101,6 +111,15 @@ function ExpenseForm(){
                     rows="4" 
                     onChange={handleInput('description')}
                 ></textarea>
+            </div>
+            <div class="input-control">
+                <input type="file"
+                name="uploadfile"
+              
+                id="file"
+                onChange={handleFileChange}
+                ></input>
+                <button className="upload-btn"><span>{plus}</span>Upload</button>
             </div>
             <div className="submit-btn">
                 <button><span>{plus}</span> Add Expense</button>

@@ -5,17 +5,17 @@ const coinSchema=new mongoose.Schema({
         required:true,
         unique: true,
     },
-    price:{
-        type:Number,
-        required:true,
-    },
-    rank:{
-        type:Number,
-        required:true,
-    },
-    link:{
-        type:String,
-        required:true,
-    }
+    // price:{
+    //     type:Number,
+    //     required:true,
+    // },
+    // rank:{
+    //     type:Number,
+    //     required:true,
+    // },
+    // link:{
+    //     type:String,
+    //     required:true,
+    // }
 })
 module.exports=mongoose.model('Crypto',coinSchema)

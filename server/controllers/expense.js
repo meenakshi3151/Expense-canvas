@@ -1,16 +1,17 @@
-
+[[[]]]
 
 const ExpenseSchema=require('../models/expenseModel')
 
 exports.addExpense=async (req,res)=>{
     //destructuring the data which coming through the body of request
-    const {title,amount,category,description,date}=req.body;
+    const {title,amount,category,description,date,file}=req.body;
     const expense=ExpenseSchema({
         title,
         amount,
         category,
         description,
-        date
+        date,
+        file
     })
     // conditions
     try{
