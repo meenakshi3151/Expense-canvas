@@ -15,6 +15,7 @@ import Bills from "../Bills/Bills"
 import { useThemeContext } from "../../context/ThemeContext";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ChatPage from "./ChatPage"
 
 function App(){
     const {toggleTheme,isDarkTheme}=useThemeContext();
@@ -33,7 +34,9 @@ function App(){
             case 4:
                 return <Expense/>
             case 5:
-                return <Dashboard/>
+                return <ChatPage/>
+            case 6:
+                return <ChatPage/>
             case 7:
                 return <Crypto/>
             case 8:

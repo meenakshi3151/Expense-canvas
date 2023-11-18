@@ -8,7 +8,7 @@ const generateToken = require("../config/generateToken");
 const allUsers = asyncHandler(async (req, res) => {
   const keyword = req.query.search
     ? {
-        $or: [
+        $or: [               
           { name: { $regex: req.query.search, $options: "i" } },
           { email: { $regex: req.query.search, $options: "i" } },
         ],
