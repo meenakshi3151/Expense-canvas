@@ -3,16 +3,26 @@ import { menuItems } from "../../utils/menuItems";
 import styled from 'styled-components'
 import { dark ,light} from "../../utils/icons";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "@chakra-ui/react";
 
 function Navigation({active,setActive,toggleTheme,isDarkTheme}){
     const [themeIcon, setThemeIcon] = useState(dark);
     const [borderColor, setBorderColor] = useState('#333');
     const navigate = useNavigate();
+    const toast = useToast();
 
     const logoutHandler = () => {
         localStorage.removeItem ("userInfo");
-
+        toast({
+            title: "Logged Out Sucessfully",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+            position: "bottom",
+          });
        navigate('/Login');
+
+
     };
     
     const handleToggleTheme = () => {
@@ -39,7 +49,7 @@ function Navigation({active,setActive,toggleTheme,isDarkTheme}){
                         <span>{item.title}</span>
                     </li>
                 })}
-            <button onClick={ logoutHandler }><span></span><span></span>Logout</button>
+            <button onClick={ logoutHandler }><span><i class="fa-solid fa-arrow-right-from-bracket fa-beat"></i></span><span></span>Logout</button>
             </ul>
             
             {/* <div>
