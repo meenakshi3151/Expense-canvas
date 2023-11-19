@@ -22,6 +22,9 @@ function App(){
     const [active,setActive]=useState(1);
     const use=useGlobalContext();
     const [borderColor,setBorderColor]=useState('#333');
+
+
+
     console.log(use);
     const displayData=()=>{
         switch(active){
@@ -66,7 +69,10 @@ function App(){
                     {displayData()}
                 </main>
 
+                
+                {/* <LogoutButton onClick={handleLogout}>Logout</LogoutButton> */}
             </MainLayout>
+            
             <ToastContainer autoClose={3000} position="top-right" />
         </AppStyled>
     )
@@ -90,7 +96,21 @@ const AppStyled=styled.div`
             width:0;
         }
     }
-`;
+    `
+
+        // const LogoutButton = styled.button`
+        // position: absolute;
+        // bottom:20px;
+        // right:20px;
+        // padding:10px 20px;
+        // background-color: #333;
+        // color: #fff;
+        // border: none;
+        // border-radius: 5px;
+        // cursor: pointer;
+        // `
+
+
 
 
 export default App;
