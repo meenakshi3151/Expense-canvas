@@ -9,7 +9,6 @@ const fs=require('fs')
 const chatRoutes = require("./routes/chatRoutes");
 
 
-
 dotenv.config();
 
 connectDB();
@@ -34,7 +33,7 @@ const corsOptions = {
 //   origin: true,
 // };
 // app.use(cors(corsOptions));
-
+//
 
 app.use(cors(corsOptions)); // Use the 'cors' middleware with the configured options
 

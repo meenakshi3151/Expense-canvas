@@ -6,7 +6,7 @@ import Plot from "react-plotly.js"; // Import Plot component from your plotting 
 import GraphValues from "./StocksComponents/graphValues";
 const symbols = [
     ["AMZN", "AMAZON STOCKS"],
-    ["MSFT", "MICROSOFT STOCKS"],["GOOGL","GOOGLE STOCKS"],["META","META STOCKS"],["RELIANCE","RELIANCE INDUSTRIES STOCKS"],["TSLA","TESLA"]
+    ["MSFT", "MICROSOFT STOCKS"],["GOOGL","GOOGLE STOCKS"],["META","META STOCKS"],["IBM","IBM STOCKS"],["TSLA","TESLA"]
   ];
 function Stocks() {
   return (

@@ -4,65 +4,78 @@ import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
 import { useGlobalContext } from "../../context/globalContext";
 import { plus } from "../../utils/icons";
-function ExpenseForm(){
+
+function ExpenseForm() {
     //function to handle the file change
     // const [file, setFile] = useState(null);
 
     // acessing the add income function using useGlobalContext() hook
-
-    const {addExpense,getExpense,error,setError}=useGlobalContext()
-    const [inputState,setInputState]=useState({
-        title:'',
-        amount:'',
-        date:'',
-        category:'',
-        description:'',
-        file:null
+   
+    const { addExpense, getExpense, error, setError } = useGlobalContext()
+    const [inputState, setInputState] = useState({
+        title: '',
+        amount: '',
+        date: '',
+        category: '',
+        description: '',
+        file: ''
     })
-    const {title,amount,date,category,description}=inputState;
+    const { title, amount, date, category, description ,file} = inputState;
     //updating the Input Fields
     //Taking the name of fields that has to be updated
-    const handleInput=(name)=>e=>{
+    const handleInput = (name) => e => {
+        if(name==='file'){
+            setError('')
+            setInputState({ ...inputState, [name]: e.target.files[0]})
+            getExpense()
+        }
+        else{ 
         setError('')
-        setInputState({...inputState,[name]:e.target.value})
+        setInputState({ ...inputState, [name]: e.target.value })
         getExpense()
+        }
     }
-const [file,setFile]=useState(null);
-    const handleFileChange = (e) => {
-        const selectedFile = e.target.files[0];
-        setFile(selectedFile);
-    };
-    const handleSubmit=e=>{
+    
+    // const handleFileChange = (e) => {
+    //     const selectedFile = e.target.files[0];
+    //     setFile(selectedFile);
+    // };
+    const handleSubmit = e => {
         e.preventDefault();
+       
+        console.log(inputState);
         addExpense(inputState)
         //After Clicking the All fields become empty
+       
+        // document.getElementById('file').value = '';
         setInputState({
-            title:'',
-            amount:'',
-            date:'',
-            category:'',
-            description:'',
-           file:null,
+            title: '',
+            amount: '',
+            date: '',
+            category: '',
+            description: '',
+             file:'',
         })
-        
+
     }
 
-    return(
+    return (
         <ExpenseFormStyle onSubmit={handleSubmit} encType="multipart/form-data" >
             {error && <p className="error">
-                    {error}
-                </p>}
+                {error}
+            </p>}
             <div className="input">
-                <input 
+                 <input
                     type="text"
                     value={title}
                     name={'title'}
                     placeholder="Expense Title"
                     onChange={handleInput('title')}
-                />
+                  />
             </div>
             <div className="input">
-                <input 
+
+                <input
                     type="text"
                     value={amount}
                     name={'amount'}
@@ -71,55 +84,50 @@ const [file,setFile]=useState(null);
                 />
             </div>
             <div className="input">
-            <DatePicker
-                id='date'
-                placeholderText='Enter a Date'
-                selected={date}
-                dateFormat="dd/MM/yyyy"
-                onChange={(selectedDate) => {
-                    const currentDate = new Date();
-                    if (selectedDate > currentDate) {
-                    setError('Please select a date in the past or today.');
-                    } else {
-                    setInputState({ ...inputState, date: selectedDate });
-                    setError('');
-                    }
-                }}
+                <DatePicker
+                    id='date'
+                    placeholderText='Enter a Date'
+                    selected={date}
+                    dateFormat="dd/MM/yyyy"
+                    onChange={(date) => {
+ 
+                        setInputState({ ...inputState, date: date })
+                    }}
                 />
-                            
+
             </div>
             <div className="selects input-control">
                 <select required value={category} name="category" id="category" onChange={handleInput('category')}>
-                <option value="" disabled >Select Option</option>
+                    <option value="" disabled >Select Option</option>
                     <option value="education">Education</option>
                     <option value="groceries">Groceries</option>
                     <option value="health">Health</option>
                     <option value="subscriptions">Subscriptions</option>
                     <option value="takeaways">Takeaways</option>
-                    <option value="clothing">Clothing</option>  
-                    <option value="travelling">Travelling</option>  
-                    <option value="other">Other</option>  
+                    <option value="clothing">Clothing</option>
+                    <option value="travelling">Travelling</option>
+                    <option value="other">Other</option>
                 </select>
-            </div> 
+            </div>
             <div className="input-control">
-                <textarea 
-                    name="description" 
-                    value={description} 
-                    placeholder="Add some reference" 
-                    id="description" 
-                    cols="30" 
-                    rows="4" 
+                <textarea
+                    name="description"
+                    value={description}
+                    placeholder="Add some reference"
+                    id="description"
+                    cols="30"
+                    rows="4"
                     onChange={handleInput('description')}
                 ></textarea>
             </div>
             <div class="input-control">
                 <input type="file"
-                name="uploadfile"
-              
-                id="file"
-                onChange={handleFileChange}
+                    name={'file'}
+                    id="file"
+                    onChange={handleInput('file')}
+                    // ref={file}
                 ></input>
-                <button className="upload-btn"><span>{plus}</span>Upload</button>
+                {/* <button className="upload-btn"><span>{plus}</span>Upload</button> */}
             </div>
             <div className="submit-btn">
                 <button><span>{plus}</span> Add Expense</button>
@@ -128,7 +136,7 @@ const [file,setFile]=useState(null);
     )
 }
 
-const ExpenseFormStyle=styled.form`
+const ExpenseFormStyle = styled.form`
 display: flex;
 flex-direction: column;
 gap: 2rem;
