@@ -49,7 +49,14 @@ function Navigation({active,setActive,toggleTheme,isDarkTheme}){
                         <span>{item.title}</span>
                     </li>
                 })}
-            <button onClick={ logoutHandler }><span><i class="fa-solid fa-arrow-right-from-bracket fa-beat"></i></span><span></span>Logout</button>
+                <button onClick={logoutHandler} style={{ color: "#FF0000" }}>
+                    <span>
+                        <i className="fa-solid fa-arrow-right-from-bracket fa-beat" style={{ color: '#FF0000' }}></i>
+                    </span>
+                    <span></span>
+                    Logout
+                </button>
+
             </ul>
             
             {/* <div>
