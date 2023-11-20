@@ -32,9 +32,9 @@ const ExpenseSchema=new mongoose.Schema({
         trim:true
     },
     file:{
-       filePath: String,
-       fileSize: Number,
-       fileName: String
+        data:Buffer,
+        contentType: String,
+        
     }
     
 },{timestamps:true})
