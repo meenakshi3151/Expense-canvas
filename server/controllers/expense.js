@@ -23,6 +23,7 @@ exports.addExpense=async (req,res)=>{
             return res.status(400).json({message:'Amount must be number and positive'})
         }
        if(file){
+
         const newfile=new ExpenseSchema({
             file:{
                 data:req.file.filename,
@@ -37,7 +38,7 @@ exports.addExpense=async (req,res)=>{
 
         res.status(200).json({message:'Expense successfully Added'})
     }catch(error){
-        res.status(500).json(expense)
+        res.status(500).json({message:'server side error'})
     }
     console.log(expense)
 }
@@ -75,3 +76,4 @@ exports.upload= multer(
         storage:storage
     }
 ).single('testfile')
+

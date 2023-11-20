@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
+// import { useEffect, useState } from "react" 
 import {
   Box,
   Container,
@@ -9,11 +11,25 @@ import {
   Tabs,
   Text,
 } from "@chakra-ui/react";
-import { useHistory } from "react-router";
+// import { useHistory } from "react-router";
 import Login from "../Authentication/Login";
 import Signup from "../Authentication/SignUp";
+// import mainpage from "../Pages/mainpage"
 
 function Homepage() {
+
+  const navigate = useNavigate();
+  
+  useEffect(() =>{
+    const user = JSON.parse (localStorage.getItem("userInfo"));
+     
+     if (user){
+         navigate("/mainpage");
+     }
+
+ }, [navigate]);
+
+
   const [selectedTab, setSelectedTab] = useState(0); // 0 for Login, 1 for Sign Up
 
   const handleTabChange = (index) => {

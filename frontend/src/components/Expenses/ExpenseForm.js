@@ -10,7 +10,6 @@ function ExpenseForm() {
     // const [file, setFile] = useState(null);
 
     // acessing the add income function using useGlobalContext() hook
-
     const { addExpense, getExpense, error, setError } = useGlobalContext()
     const [inputState, setInputState] = useState({
         title: '',
@@ -20,6 +19,7 @@ function ExpenseForm() {
         description: '',
         file: ''
     })
+
     const { title, amount, date, category, description, file } = inputState;
     //updating the Input Fields
     //Taking the name of fields that has to be updated
@@ -36,6 +36,7 @@ function ExpenseForm() {
         }
     }
 
+
     // const handleFileChange = (e) => {
     //     const selectedFile = e.target.files[0];
     //     setFile(selectedFile);
@@ -43,11 +44,13 @@ function ExpenseForm() {
     const handleSubmit = e => {
         e.preventDefault();
 
+
         console.log(inputState);
         addExpense(inputState)
         //After Clicking the All fields become empty
 
         document.getElementById('file').value = '';
+
         setInputState({
             title: '',
             amount: '',
@@ -55,6 +58,7 @@ function ExpenseForm() {
             category: '',
             description: '',
             //  file:'',
+
         })
 
     }
@@ -65,13 +69,15 @@ function ExpenseForm() {
                 {error}
             </p>}
             <div className="input">
+
                 <input
+
                     type="text"
                     value={title}
                     name={'title'}
                     placeholder="Expense Title"
                     onChange={handleInput('title')}
-                />
+                  />
             </div>
             <div className="input">
 
@@ -83,18 +89,21 @@ function ExpenseForm() {
                     onChange={handleInput('amount')}
                 />
             </div>
-            <div className="input">
-                <DatePicker
-                    id='date'
-                    placeholderText='Enter a Date'
-                    selected={date}
-                    dateFormat="dd/MM/yyyy"
-                    onChange={(date) => {
-
-                        setInputState({ ...inputState, date: date })
-                    }}
-                />
-
+           <div className="input">
+            <DatePicker
+                id='date'
+                placeholderText='Enter a Date'
+                selected={date}
+                dateFormat="dd/MM/yyyy"
+                onChange={(selectedDate) => {
+                    const currentDate = new Date();
+                    if (selectedDate > currentDate) {
+                    setError('Please select a date in the past or today.');
+                    } else {
+                    setInputState({ ...inputState, date: selectedDate });
+                    setError('');
+                    }
+                }}/>
             </div>
             <div className="selects input-control">
                 <select required value={category} name="category" id="category" onChange={handleInput('category')}>
@@ -125,7 +134,7 @@ function ExpenseForm() {
                     name={'file'}
                     id="file"
                     onChange={handleInput('file')}
-                // ref={file}
+
                 ></input>
                 {/* <button className="upload-btn"><span>{plus}</span>Upload</button> */}
             </div>

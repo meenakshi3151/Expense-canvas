@@ -2,9 +2,29 @@ import React, { useState } from "react";
 import { menuItems } from "../../utils/menuItems";
 import styled from 'styled-components'
 import { dark ,light} from "../../utils/icons";
+import { useNavigate } from "react-router-dom";
+import { useToast } from "@chakra-ui/react";
+
 function Navigation({active,setActive,toggleTheme,isDarkTheme}){
     const [themeIcon, setThemeIcon] = useState(dark);
     const [borderColor, setBorderColor] = useState('#333');
+    const navigate = useNavigate();
+    const toast = useToast();
+
+    const logoutHandler = () => {
+        localStorage.removeItem ("userInfo");
+        toast({
+            title: "Logged Out Sucessfully",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+            position: "bottom",
+          });
+       navigate('/Login');
+
+
+    };
+    
     const handleToggleTheme = () => {
         // Toggle the theme
         // setThemeIcon((prevIcon) => (prevIcon === dark ? light : dark)); // Update the icon dynamically
@@ -29,7 +49,16 @@ function Navigation({active,setActive,toggleTheme,isDarkTheme}){
                         <span>{item.title}</span>
                     </li>
                 })}
+                <button onClick={logoutHandler} style={{ color: "#FF0000" }}>
+                    <span>
+                        <i className="fa-solid fa-arrow-right-from-bracket fa-beat" style={{ color: '#FF0000' }}></i>
+                    </span>
+                    <span></span>
+                    Logout
+                </button>
+
             </ul>
+            
             {/* <div>
 
             </div> */}
@@ -99,6 +128,17 @@ const NavStyled=styled.nav`
     }
 
 `
+const LogoutButton = styled.button`
+    position: absolute;
+    bottom:20px;
+    right:20px;
+    padding:10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+`;
 export default Navigation
 
 

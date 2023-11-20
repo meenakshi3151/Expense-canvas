@@ -15,12 +15,16 @@ import Bills from "../Bills/Bills"
 import { useThemeContext } from "../../context/ThemeContext";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ChatPage from "./ChatPage"
 
 function App(){
     const {toggleTheme,isDarkTheme}=useThemeContext();
     const [active,setActive]=useState(1);
     const use=useGlobalContext();
     const [borderColor,setBorderColor]=useState('#333');
+
+
+
     console.log(use);
     const displayData=()=>{
         switch(active){
@@ -33,7 +37,9 @@ function App(){
             case 4:
                 return <Expense/>
             case 5:
-                return <Dashboard/>
+                return <ChatPage/>
+            case 6:
+                return <ChatPage/>
             case 7:
                 return <Crypto/>
             case 8:
@@ -63,7 +69,10 @@ function App(){
                     {displayData()}
                 </main>
 
+                
+                {/* <LogoutButton onClick={handleLogout}>Logout</LogoutButton> */}
             </MainLayout>
+            
             <ToastContainer autoClose={3000} position="top-right" />
         </AppStyled>
     )
@@ -87,7 +96,21 @@ const AppStyled=styled.div`
             width:0;
         }
     }
-`;
+    `
+
+        // const LogoutButton = styled.button`
+        // position: absolute;
+        // bottom:20px;
+        // right:20px;
+        // padding:10px 20px;
+        // background-color: #333;
+        // color: #fff;
+        // border: none;
+        // border-radius: 5px;
+        // cursor: pointer;
+        // `
+
+
 
 
 export default App;
