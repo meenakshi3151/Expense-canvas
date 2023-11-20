@@ -23,7 +23,9 @@ exports.addExpense=async (req,res)=>{
             return res.status(400).json({message:'Amount must be number and positive'})
         }
        if(file){
-        const newfile=new ExpenseSchema({            file:{
+
+        const newfile=new ExpenseSchema({
+            file:{
                 data:req.file.filename,
                 contentType:'image/png'
             }
@@ -36,7 +38,7 @@ exports.addExpense=async (req,res)=>{
 
         res.status(200).json({message:'Expense successfully Added'})
     }catch(error){
-        res.status(500).json(expense)
+        res.status(500).json({message:'server side error'})
     }
     console.log(expense)
 }
@@ -75,13 +77,3 @@ exports.upload= multer(
     }
 ).single('testfile')
 
-// exports.uploads=async (req,res)=>{
-//     this.upload(req,res,(err)=>{
-//         if(err){
-//             console.log(err)
-//         }
-//         else{
-//             const newFile=new ExpenseSchema
-//         }
-//     })
-// }

@@ -33,7 +33,10 @@ const ExpenseSchema=new mongoose.Schema({
     },
     file:{
         data:Buffer,
-        contentType: String
+
+        contentType: String,
+        
+
     }
     
 },{timestamps:true})
