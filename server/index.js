@@ -42,6 +42,7 @@ const PORT = process.env.PORT;
 // Use the userRoutes middleware
 app.use('/api/user', userRoutes);
 app.use('/api/chat', chatRoutes);
+app.use('/api/message', messageRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
