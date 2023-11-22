@@ -9,7 +9,6 @@ import {
   ModalBody,
   ModalCloseButton,
   Button,
-  useDisclosure,
   IconButton,
   Text,
   Image,
@@ -41,7 +40,7 @@ const ProfileModal = ({ user, children }) => {
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody
-            d="flex"
+            display="flex"
             flexDir="column"
             alignItems="center"
             justifyContent="space-between"
@@ -53,8 +52,8 @@ const ProfileModal = ({ user, children }) => {
               alt={user.name}
             />
             <Text
-              fontSize={{ base: "28px", md: "30px" }}
-              fontFamily="Work sans"
+              fontSize={{ base: "22px", md: "26px" }}
+              // fontFamily="Work sans"
             >
               Email: {user.email}
             </Text>
