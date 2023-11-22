@@ -13,6 +13,7 @@ import {
 import { getSender, getSenderFull } from "./ChatLogics";
 import ProfileModal from "./ProfileModal";
 import UpdateGroupChatModal from "./UpdateGroupChat";
+import ScrollableChat from "./ScrollableChat";
 import axios from "axios";
 import './style.css';
 
@@ -179,7 +180,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               />
             ) : (
               <div className="messages">
-                {/* <ScrollableChat messages={messages} /> */}
+                <ScrollableChat messages={messages} />
               </div>
             )}
 
