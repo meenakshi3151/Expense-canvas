@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const colors = require('colors');
 const userRoutes = require('./routes/userRoutes');
+const messageRoutes = require('./routes/messageRoutes')
 const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 const cors = require('cors'); // Import the 'cors' middleware
 const fs=require('fs')
