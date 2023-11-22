@@ -17,6 +17,10 @@ import {
 const ProfileModal = ({ user, children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  if (!user || !user.name || !user.pic || !user.email) {
+    return null; // Or render a default message indicating missing user information
+  }
+
   return (
     <>
       {children ? (
