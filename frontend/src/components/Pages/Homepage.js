@@ -26,6 +26,7 @@ function Homepage() {
      if (user){
          navigate("/mainpage");
      }
+    
 
  }, [navigate]);
 

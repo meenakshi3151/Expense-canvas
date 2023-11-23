@@ -24,16 +24,11 @@ function ExpenseForm() {
     //updating the Input Fields
     //Taking the name of fields that has to be updated
     const handleInput = (name) => e => {
-        if (name === 'file') {
-            setError('')
-            setInputState({ ...inputState, [name]: e.target.files[0] })
-            getExpense()
-        }
-        else {
+       
             setError('')
             setInputState({ ...inputState, [name]: e.target.value })
-            getExpense()
-        }
+            
+        
     }
 
 
@@ -41,16 +36,16 @@ function ExpenseForm() {
     //     const selectedFile = e.target.files[0];
     //     setFile(selectedFile);
     // };
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault();
 
 
-        console.log(inputState);
-        addExpense(inputState)
-        //After Clicking the All fields become empty
-
-        document.getElementById('file').value = '';
-
+        // console.log(inputState);
+        const user=JSON.parse(localStorage.getItem('userInfo'))
+        const userId=user._id;
+        await addExpense({...inputState,userId})
+        
+        getExpense()
         setInputState({
             title: '',
             amount: '',

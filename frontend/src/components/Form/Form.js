@@ -25,7 +25,9 @@ function Form(){
 
     const handleSubmit=e=>{
         e.preventDefault();
-        addIncome(inputState)
+        const user=JSON.parse(localStorage.getItem('userInfo'))
+        const userId=user._id;
+        addIncome({...inputState,userId})
         setInputState({
             title:'',
             amount:'',
@@ -33,7 +35,6 @@ function Form(){
             category:'',
             description:'',
         })
-        
     }
 
     return(

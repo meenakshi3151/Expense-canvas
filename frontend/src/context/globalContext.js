@@ -26,10 +26,16 @@ export const GlobalProvider=({children})=>{
     }
     //Get the data from database 
     const getIncome=async()=>{
-        const response=await axios.get(`${BASE_URL}getIncomes`)
-        console.log('response'+response)
+        const user = JSON.parse(localStorage.getItem("userInfo"))
+
+        const userId = user._id
+        const params ={
+            userId: userId}
+        
+        const response=await axios.get(`${BASE_URL}getIncomes`,{params:params})
+    
         setIncomes(response.data)
-        console.log(response.data)
+  
     }
     
     //Deleting the Income
@@ -60,7 +66,14 @@ export const GlobalProvider=({children})=>{
     }
 
     const getExpense=async()=>{
-        const response=await axios.get(`${BASE_URL}getExpenses`)
+        const user = JSON.parse(localStorage.getItem("userInfo"))
+        
+        const userId = user._id
+        const params ={
+            userId: userId
+        }
+        
+        const response=await axios.get(`${BASE_URL}getExpenses`,{params:params})
         setExpenses(response.data)
         console.log(response.data)
     }
@@ -101,8 +114,15 @@ export const GlobalProvider=({children})=>{
 
 
     const getBill=async()=>{
-        const response=await axios.get(`${BASE_URL}getBills`)
-        setBill(response.data);
+        const user = JSON.parse(localStorage.getItem("userInfo"))
+
+        const userId = user._id
+        const params ={
+            userId: userId}
+        
+        const response=await axios.get(`${BASE_URL}getBills`,{params:params})
+    
+        setBill(response.data)
     }
 
     const deleteBill=async(id)=>{

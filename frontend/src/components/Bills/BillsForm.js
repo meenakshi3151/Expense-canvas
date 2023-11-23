@@ -25,7 +25,9 @@ function BillsForm(){
 
     const handleSubmit=e=>{
         e.preventDefault();
-        addBill(inputState)
+        const user=JSON.parse(localStorage.getItem('userInfo'))
+        const userId=user._id;
+        addBill({...inputState,userId})
         setInputState({
             title:'',
             amount:'',

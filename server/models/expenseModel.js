@@ -33,11 +33,9 @@ const ExpenseSchema=new mongoose.Schema({
     },
     file:{
         data:Buffer,
-
         contentType: String,
-        
-
     }
-    
 },{timestamps:true})
-module.exports=mongoose.model('Expense',ExpenseSchema)
+const Expense = mongoose.model("Expense",ExpenseSchema)
+
+module.exports = Expense;

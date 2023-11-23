@@ -10,7 +10,6 @@ const userSchema = mongoose.Schema(
       required: true,
       validate: {
         validator: function (value) {
-          // You can customize this validation logic based on your requirements
           return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]).{8,}$/.test(value);
         },
         message: props => `password  must contain at least 8 characters, one uppercase letter, one lowercase letter, one digit, and one special character.`,
@@ -25,6 +24,15 @@ const userSchema = mongoose.Schema(
       required: true,
       default: false,
     },
+    incomeHistory:[{
+      type:mongoose.Schema.Types.ObjectId,ref:'Income'
+    }],
+    expenseHistory:[{
+      type:mongoose.Schema.Types.ObjectId,ref:'Expense'
+    }],
+    billHistory:[{
+      type:mongoose.Schema.Types.ObjectId,ref:'Bills'
+    }]
   },
   { timestamps: true }
 );
