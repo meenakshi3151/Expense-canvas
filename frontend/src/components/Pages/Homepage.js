@@ -21,8 +21,9 @@ function Homepage() {
   const navigate = useNavigate();
   
   useEffect(() =>{
+   
     const user = JSON.parse (localStorage.getItem("userInfo"));
-     
+    console.log(user);
      if (user){
          navigate("/mainpage");
      }

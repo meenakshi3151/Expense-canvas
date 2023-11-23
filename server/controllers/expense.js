@@ -1,79 +1,81 @@
-[[[]]]
+const ExpenseSchema = require('../models/expenseModel');
+const multer = require('multer');
+//setting up multer to upload file
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, '../frontend/src/images/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname); 
+  },
+});
+//uploading the file
+const upload = multer({ storage: storage }).single('file'); 
 
-const ExpenseSchema=require('../models/expenseModel')
-const multer=require("multer")
-exports.addExpense=async (req,res)=>{
-    //destructuring the data which coming through the body of request
-    const {title,amount,category,description,date,file}=req.body;
-     console.log(file)
-    const expense=ExpenseSchema({
+exports.addExpense = async (req, res) => {
+  try {
+    // setting up middleware 
+    
+    upload(req, res, async (err) => {
+      if (err instanceof multer.MulterError) {
+      
+        return res.status(400).json({ message: 'Multer error' });
+      } else if (err) {
+      //handling all the errors
+        return res.status(500).json({ message: 'server side error in 2 block' });
+      }
+      //other data in expense
+      const { title, amount, category, description, date, } = req.body;
+  const fileName=req.file.filename;
+      // Checking for required fields
+      if (!title || !category || !description || !date || isNaN(amount) || amount <= 0 ) {
+        return res.status(400).json({ message: 'All the fileds are required' });
+      }
+      const expense = new ExpenseSchema({
         title,
         amount,
         category,
         description,
         date,
-        file
-    })
-    // conditions
-    try{
-        if(!title || !category || !description || !date){
-            return res.status(400).json({message:'All fields are required'})
+        file:{
+       image:fileName
         }
-        if(amount<=0 || !amount==='number'){
-            return res.status(400).json({message:'Amount must be number and positive'})
-        }
-       if(file){
+      });
 
-        const newfile=new ExpenseSchema({
-            file:{
-                data:req.file.filename,
-                contentType:'image/png'
-            }
-        })
-        newfile.save()
-        .then(()=>res.send("successfully uploaded"))
-        .catch((err)=>console.log(err))
-       }
-        await expense.save()
+      // Saving the expense
+      await expense.save();
 
-        res.status(200).json({message:'Expense successfully Added'})
-    }catch(error){
-        res.status(500).json({message:'server side error'})
-    }
-    console.log(expense)
-}
-exports.getExpenses=async(req,res)=>{
-    try{
-        const expenses=await ExpenseSchema.find().sort({createdAt:-1})
-        res.status(200).json(expenses)
-    }catch(error){
-        res.status(500).json({message:'server side error'})
-    }
-    
-}
-exports.deleteExpense=async(req,res)=>{
-    //get corresponding id to delete
-    const {id}=req.params;
-    ExpenseSchema.findByIdAndDelete(id)    
-        .then((expense)=>{
-            res.status(200).json({message:'Expense Deleted'})
-        })
-        .catch((err)=>{
-            res.status(500).json({message:'server side error'})
-        })
-}
-//storage...disk storage is to store the files according to us on the disk 
-const storage=multer.diskStorage({
-    destination:'uploads',
-    //cb: callback
-    filename:(req,file,cb)=>{
-        cb(null,Date.now+file.originalname)
-    }
+      res.status(200).json({ message: 'Expense successfully Added' });
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'SServer side error' });
+  }
+};
 
-});
-exports.upload= multer(
-    {
-        storage:storage
+exports.getExpenses = async (req, res) => {
+  try {
+    const expenses = await ExpenseSchema.find().sort({ createdAt: -1 });
+    res.status(200).json(expenses);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'sserver side error' });
+  }
+};
+
+exports.deleteExpense = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedExpense = await ExpenseSchema.findByIdAndDelete(id);
+    if (!deletedExpense) {
+      return res.status(404).json({ message: 'Expense not found' });
     }
-).single('testfile')
+    res.status(200).json({ message: 'Expense Deleted' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server side error' });
+  }
+};
+
+
 

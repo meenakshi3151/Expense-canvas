@@ -4,9 +4,11 @@ import { Input, InputGroup, InputRightElement } from "@chakra-ui/input";
 import { VStack } from "@chakra-ui/layout";
 import { useState } from "react";
 import axios from "axios";
+import { useEffect } from "react";
 import { useToast } from "@chakra-ui/react";
 import { useNavigate } from 'react-router-dom';
 import { useGlobalContext } from "../../context/globalContext";
+import  {GoogleLogin} from "@leecheuk/react-google-login"
 // import { useHistory } from 'react-router-dom';
 
 // import { ChatState } from "../../Context/ChatProvider";
@@ -14,6 +16,7 @@ import { useGlobalContext } from "../../context/globalContext";
 
 const Login = () => {
   const [show, setShow] = useState(false);
+
   const { loginUser } = useGlobalContext();
   const handleClick = () => setShow(!show);
   const toast = useToast();
@@ -24,6 +27,21 @@ const Login = () => {
   // const history = useHistory();
   // const { setUser } = App();
 
+function navigateF(url){
+  console.log(url);
+      window.location.href = url;  
+  }
+
+ 
+
+  async function auth(){
+    const response =await fetch('http://localhost:5000/requestAuth',{method:'post'});
+    const data = await response.json();
+    console.log(data);
+    navigateF(data.url);
+ 
+
+  }
   const submitHandler = async () => {
     setLoading(true);
     if (!email || !password) {
@@ -113,7 +131,17 @@ const Login = () => {
       >
         Login
       </Button>
+      <Button 
+     colorScheme="blue"
+     width="100%"
+     style={{ marginTop: 15 }}
+ 
+     onClick={()=> auth()}>
+          Login with google
+            </Button>
+
     </VStack>
+
   );
 };
 

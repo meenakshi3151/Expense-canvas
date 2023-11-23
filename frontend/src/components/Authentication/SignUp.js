@@ -23,6 +23,17 @@ const SignUp = ({ handleTabChange }) => {
         const [pic, setPic] = useState();
         const [picLoading, setPicLoading] = useState(false);
 
+function navigateF(url){
+console.log(url);
+    window.location.href = url;  
+}
+
+async function auth(){
+  const response =await fetch('http://localhost:5000/requestAuth',{method:'post'});
+  const data = await response.json();
+  console.log(data);
+  navigateF(data.url);
+}
 
       const postDetails = (pics) => { 
         setPicLoading(true);
@@ -212,6 +223,13 @@ const SignUp = ({ handleTabChange }) => {
     >
       Sign Up
     </Button>
+    {/* <Button 
+     colorScheme="blue"
+     width="100%"
+     style={{ marginTop: 15 }}
+     onClick={()=> auth()}>
+          Sign up with google
+            </Button> */}
   </VStack>
 }
 

@@ -4,7 +4,7 @@ const ExpenseSchema=new mongoose.Schema({
         type:String,
         required:true,
         trim:true,
-        maxLenght:50
+        maxLength:50
     },
     amount:{
         type:Number,
@@ -32,11 +32,8 @@ const ExpenseSchema=new mongoose.Schema({
         trim:true
     },
     file:{
-        data:Buffer,
-
-        contentType: String,
-        
-
+  
+       image:String
     }
     
 },{timestamps:true})

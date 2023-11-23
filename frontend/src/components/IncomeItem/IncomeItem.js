@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+
 import { dollar,calender,comment ,trash,money, freelance, stocks, users, card, bitcoin, yt, piggy, book, food, medical, tv, takeaway, clothing, circle, travel} from '../../utils/icons';
 import { dateFormat } from '../../utils/dateFormat';
 function IncomeItem({
@@ -12,9 +13,12 @@ function IncomeItem({
     indicatorColor,
     type,
     deleteItem,
+    file,
     totalIncome
 }){
-
+    
+    
+ 
     const categoryIcon=()=>{
         console.log('hello duniya');
         switch(category){
@@ -41,6 +45,7 @@ function IncomeItem({
 
     const expenseIcon = () => {
         console.log('hello world');
+        
         switch (category) {
             case 'education':
                 return book;
@@ -63,9 +68,8 @@ function IncomeItem({
         }
     }
 
-
-
     return(
+
         <IncomeItemStyle indicator={indicatorColor}>
             
             <div className='icon'>
@@ -82,6 +86,7 @@ function IncomeItem({
                         <p>
                             {comment} {description}
                         </p>
+                  
                     </div>
                     <div className='btn-con'>
                         <button onClick={()=>deleteItem(id)}>{trash}</button>

@@ -4,7 +4,7 @@ import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
 import { useGlobalContext } from "../../context/globalContext";
 import { plus } from "../../utils/icons";
-
+import axios from 'axios'
 function ExpenseForm() {
     //function to handle the file change
     // const [file, setFile] = useState(null);
@@ -24,6 +24,7 @@ function ExpenseForm() {
     //updating the Input Fields
     //Taking the name of fields that has to be updated
     const handleInput = (name) => e => {
+        //handles the file input change 
         if (name === 'file') {
             setError('')
             setInputState({ ...inputState, [name]: e.target.files[0] })
@@ -41,28 +42,43 @@ function ExpenseForm() {
     //     const selectedFile = e.target.files[0];
     //     setFile(selectedFile);
     // };
-    const handleSubmit = e => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
-
-        console.log(inputState);
-        addExpense(inputState)
-        //After Clicking the All fields become empty
-
+    
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('amount', amount);
+        formData.append('date', date);
+        formData.append('category', category);
+        formData.append('description', description);
+        formData.append('file', file);
+    
+        try {
+         addExpense(formData);
+        } catch (error) {
+          // Handle error
+          console.error('Error:', error);
+          // Handle error state or show an error message to the user
+        }
+    
         document.getElementById('file').value = '';
-
         setInputState({
-            title: '',
-            amount: '',
-            date: '',
-            category: '',
-            description: '',
-            //  file:'',
-
-        })
-
-    }
-
+          title: '',
+          amount: '',
+          date: '',
+          category: '',
+          description: '',
+        });
+      };
+    
+// const submitImage=async(e)=> { 
+// const formData=new FormData();
+// formData.append("image", file);
+// const result = await  axios.post(
+//     "http://localhost:5000/api/user/addExpenses",
+//     formData
+// )
+// }
     return (
         <ExpenseFormStyle onSubmit={handleSubmit} encType="multipart/form-data" >
             {error && <p className="error">
@@ -129,14 +145,18 @@ function ExpenseForm() {
                     onChange={handleInput('description')}
                 ></textarea>
             </div>
+            {/* ALL the expense receipts in form of image will be stored in db */}
             <div class="input-control">
                 <input type="file"
                     name={'file'}
                     id="file"
+                    accept="image/"
                     onChange={handleInput('file')}
 
                 ></input>
-                {/* <button className="upload-btn"><span>{plus}</span>Upload</button> */}
+                {/* <button 
+                onSubmit={submitImage}
+                className="upload-btn"><span>{plus}</span>Upload</button> */}
             </div>
             <div className="submit-btn">
                 <button><span>{plus}</span> Add Expense</button>
