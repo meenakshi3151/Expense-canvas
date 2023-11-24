@@ -1,4 +1,5 @@
-![image](https://github.com/Ishsinghal/Expense-canvas/assets/125037000/9aeca793-4543-412b-bc4f-6873f5539d3b)﻿# Expense-Canvas
+![image](https://github.com/Ishsinghal/Expense-canvas/assets/125037000/9aeca793-4543-412b-bc4f-6873f5539d3b)﻿ 
+# Expense-Canvas
 Expense Canvas is a full-stack application designed to manage personal finances, including expenses, bills, incomes, and stocks of different companies and cryptocurrencies.
 # Features:
 
@@ -21,7 +22,7 @@ Expense Canvas is a full-stack application designed to manage personal finances,
 - **Socket.io:** Real-time updates and notifications.
 - **google-auth-library:** Authentication and user management.
 - **Charting Library:** Ploty.js chart.js
-- ### Framework and Tools
+### Framework and Tools
   - **Chakra UI:** Integrated Chakra UI React styled components for consistent and customizable UI elements.
   - **Express.js:** Routing and API management.
 
