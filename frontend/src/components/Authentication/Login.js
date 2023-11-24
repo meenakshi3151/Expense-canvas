@@ -7,6 +7,8 @@ import axios from "axios";
 import { useToast } from "@chakra-ui/react";
 import { useNavigate } from 'react-router-dom';
 import { useGlobalContext } from "../../context/globalContext";
+import styled from "styled-components";
+// import ParticlesComponent from "../LoginBg/ParticlesComponents";
 // import { useHistory } from 'react-router-dom';
 
 // import { ChatState } from "../../Context/ChatProvider";
@@ -87,6 +89,8 @@ const Login = () => {
   };
 
   return (
+    
+   
     <VStack spacing="10px">
       <FormControl id="email" isRequired>
         <FormLabel>Email Address</FormLabel>
@@ -133,6 +137,7 @@ const Login = () => {
       </Button>
 
     </VStack>
+    
   );
 };
 

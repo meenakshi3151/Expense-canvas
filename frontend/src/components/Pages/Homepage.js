@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 import { useNavigate } from 'react-router-dom';
 // import { useEffect, useState } from "react" 
 import {
@@ -18,9 +19,6 @@ import Signup from "../Authentication/SignUp";
 
 function Homepage() {
 
-
-
-
   const [selectedTab, setSelectedTab] = useState(0); // 0 for Login, 1 for Sign Up
 
   const handleTabChange = (index) => {
@@ -28,6 +26,7 @@ function Homepage() {
   };
 
   return (
+    <LoginStyled>
     <Container maxW="xl" centerContent>
       <Box
         d="flex"
@@ -60,7 +59,19 @@ function Homepage() {
         </Tabs>
       </Box>
     </Container>
+    </LoginStyled>
   );
 }
+const LoginStyled=styled.div`
+background: url('final.jpeg') no-repeat center center fixed;
+background-size: 50%; /* Adjust the background size as needed */
+background-position: 100% 100%; /* Move to the left side (0% horizontal position) */
+height: 100vh;
+width: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
+background-color:#7abfb4
 
+`
 export default Homepage;

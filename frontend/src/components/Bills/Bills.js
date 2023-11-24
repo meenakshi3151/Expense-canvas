@@ -62,7 +62,8 @@ flex-direction:row;
 width:100%;
 
 .header{
-    backgound-color:red;
+    font-weight:bold;
+    font-size:36px;
 }
 
 .totalIncome{
@@ -88,13 +89,14 @@ width:100%;
 .inner-content{
     display: flex;
     flex-direction :column;
-    
+     
     gap: 2rem;
     .content{
         flex: 1;
     }
 }
 @media (min-width: 1069px) {
+    
     .inner-content {
       flex-direction: row;
     }

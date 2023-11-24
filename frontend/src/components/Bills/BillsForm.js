@@ -88,17 +88,7 @@ function BillsForm(){
                     <option value="other">Other</option>  
                 </select>
             </div> 
-            {/* <div className="input-control">
-                <textarea 
-                    name="description" 
-                    value={description} 
-                    placeholder="Add some reference" 
-                    id="description" 
-                    cols="30" 
-                    rows="4" 
-                    onChange={handleInput('description')}
-                ></textarea>
-            </div> */}
+            
             <div className="submit-btn">
                 <button><span>{plus}</span> Add Bill</button>
             </div>
