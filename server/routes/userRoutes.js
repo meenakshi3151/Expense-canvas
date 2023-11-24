@@ -29,8 +29,4 @@ router.post('/login', authUser)
 .delete('/deleteBill/:id',deleteBill)
 router.post('/addCrypto', addCrypto);
 router.get('/getAllCoins',getAllCoins);
-
-
-
-
 module.exports = router;

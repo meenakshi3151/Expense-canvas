@@ -23,7 +23,16 @@ const Login = () => {
   const navigate = useNavigate();
   // const history = useHistory();
   // const { setUser } = App();
-
+  function navigateF(url){
+    console.log(url);
+        window.location.href = url;  
+    }
+  async function auth(){
+    const response =await fetch('http://localhost:5000/requestAuth',{method:'post'});
+    const data = await response.json();
+    console.log(data);
+    navigateF(data.url);
+  }
   const submitHandler = async () => {
     setLoading(true);
     if (!email || !password) {
@@ -90,12 +99,12 @@ const Login = () => {
       <FormControl id="password" isRequired>
         <FormLabel>Password</FormLabel>
         <InputGroup size="md">
-        <Input
-          value={password}
-          onChange={(e) => setPassword(e.target.value)} // Update the 'password' state on input change
-          type={show ? "text" : "password"}
-          placeholder="Enter password"
-        />
+          <Input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)} // Update the 'password' state on input change
+            type={show ? "text" : "password"}
+            placeholder="Enter password"
+          />
 
           <InputRightElement width="4.5rem">
             <Button h="1.75rem" size="sm" onClick={handleClick}>
@@ -113,6 +122,15 @@ const Login = () => {
       >
         Login
       </Button>
+      <Button
+        colorScheme="blue"
+        width="100%"
+        style={{ marginTop: 15 }}
+
+        onClick={() => auth()}>
+        Login with google
+      </Button>
+
     </VStack>
   );
 };
