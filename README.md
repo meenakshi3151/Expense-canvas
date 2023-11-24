@@ -33,13 +33,13 @@ Expense Canvas is a full-stack application designed to manage personal finances,
 ## Usage:
 
 1. Clone the repository:git clone https://github.com/Ishsinghal/Expense-canvas.git
-2.Install dependencies:**cd Expense-canvas
-3.Start the server: cd server->npm i->npm install google-auth-library->npm start
-4.Start the client in parallel terminal: cd frontend->npm i->npm start
-5.Set up environment variables:
-- Create a `.env` file and add necessary variables (e.g., MongoDB URI, Get your Google Auth credentials from Google cloud console).
-6.Run the application:
-7.Access the application via `http://localhost:3000`.
+2. Install dependencies:**cd Expense-canvas
+3. Start the server: cd server->npm i->npm install google-auth-library->npm start
+4. Start the client in parallel terminal: cd frontend->npm i->npm start
+5. Set up environment variables:
+-  Create a `.env` file and add necessary variables (e.g., MongoDB URI, Get your Google Auth credentials from Google cloud console).
+6. Run the application:
+7. Access the application via `http://localhost:3000`.
 
 ## Contributing:
 
