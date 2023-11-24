@@ -22,12 +22,14 @@ const ENDPOINT = "http://localhost:5000";
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
-  const { user, selectedChat, setSelectedChat } = ChatState();
+  const { user, selectedChat, setSelectedChat,notification,setNotification } = ChatState();
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [newMessage, setNewMessage] = useState();
   const toast = useToast();
   const [socketConnected, setsocketConnected] = useState(false);
+  const [typing, setTyping] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
 
   const fetchMessages = async () => {
     if (!selectedChat) return;
@@ -67,7 +69,9 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     //socket ENDPOINT
     socket = io(ENDPOINT);
     socket.emit("setup", user);
-    socket.on("connection", () => setsocketConnected(true));
+    socket.on("connected", () => setsocketConnected(true));
+    socket.on("typing", () => setIsTyping(true));
+    socket.on("stop typing", () => setIsTyping(false));
   }, []);
 
   useEffect(() => {
@@ -78,22 +82,25 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     // eslint-disable-next-line
   }, [selectedChat]);
 
-  useEffect(() => {  //message recieved
-    socket.on("message recieved", (newMessageRecived) => {
+  useEffect(() => {
+    socket.on("message recieved", (newMessageRecieved) => {
       if (
-        !selectedChatCompare ||
-        selectedChatCompare._id !== newMessageRecived.chat._id
+        !selectedChatCompare || // if chat is not selected or doesn't match current chat
+        selectedChatCompare._id !== newMessageRecieved.chat._id
       ) {
-        //give notification
+        if (!notification.includes(newMessageRecieved)) {
+          setNotification([newMessageRecieved, ...notification]);
+          setFetchAgain(!fetchAgain);
+        }
       } else {
-        setMessages([...messages, newMessageRecived]);
+        setMessages([...messages, newMessageRecieved]);
       }
     });
   });
 
   const sendMessage = async (event) => {
     if (event.key === "Enter" && newMessage) {
-      // socket.emit("stop typing", selectedChat._id);
+      socket.emit("stop typing", selectedChat._id);
       try {
         const config = {
           headers: {
@@ -129,21 +136,21 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
   const typingHandler = (e) => {
     setNewMessage(e.target.value);
-    // if (!socketConnected) return;
-    // if (!typing) {
-    //   setTyping(true);
-    //   socket.emit("typing", selectedChat._id);
-    // }
-    // let lastTypingTime = new Date().getTime();
-    // var timerLength = 3000;
-    // setTimeout(() => {
-    //   var timeNow = new Date().getTime();
-    //   var timeDiff = timeNow - lastTypingTime;
-    //   if (timeDiff >= timerLength && typing) {
-    //     socket.emit("stop typing", selectedChat._id);
-    //     setTyping(false);
-    //   }
-    // }, timerLength);
+    if (!socketConnected) return;
+    if (!typing) {
+      setTyping(true);
+      socket.emit("typing", selectedChat._id);
+    }
+    let lastTypingTime = new Date().getTime();
+    var timerLength = 3000;
+    setTimeout(() => {
+      var timeNow = new Date().getTime();
+      var timeDiff = timeNow - lastTypingTime;
+      if (timeDiff >= timerLength && typing) {
+        socket.emit("stop typing", selectedChat._id);
+        setTyping(false);
+      }
+    }, timerLength);
   };
 
   return (
@@ -216,18 +223,19 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               isRequired
               mt={3}
             >
-              {/* {istyping ? (
-                    <div>
-                      <Lottie
+              {isTyping ? (
+                <div>
+                  {/* Loading...... */}
+                  {/* <Lottie
                         options={defaultOptions}
                         // height={50}
                         width={70}
                         style={{ marginBottom: 15, marginLeft: 0 }}
-                      />
-                    </div>
-                  ) : (
-                    <></>
-                  )} */}
+                      /> */}
+                </div>
+              ) : (
+                <></>
+              )}
               <Input
                 variant="filled"
                 bg="#E0E0E0"
