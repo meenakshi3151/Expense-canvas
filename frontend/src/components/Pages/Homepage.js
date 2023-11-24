@@ -18,17 +18,7 @@ import Signup from "../Authentication/SignUp";
 
 function Homepage() {
 
-  const navigate = useNavigate();
-  
-  useEffect(() =>{
-    const user = JSON.parse (localStorage.getItem("userInfo"));
-     
-     if (user){
-         navigate("/mainpage");
-     }
-    
 
- }, [navigate]);
 
 
   const [selectedTab, setSelectedTab] = useState(0); // 0 for Login, 1 for Sign Up

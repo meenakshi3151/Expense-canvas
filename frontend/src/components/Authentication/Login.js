@@ -14,7 +14,7 @@ import { useGlobalContext } from "../../context/globalContext";
 
 const Login = () => {
   const [show, setShow] = useState(false);
-  const { loginUser } = useGlobalContext();
+  const { loginUser , setUser} = useGlobalContext();
   const handleClick = () => setShow(!show);
   const toast = useToast();
   const [email, setEmail] = useState("");
@@ -59,7 +59,7 @@ const Login = () => {
         { email, password },
         config
       );
-
+        console.log('ye hai'+data);
       toast({
         title: "Login Successful",
         status: "success",
@@ -68,7 +68,8 @@ const Login = () => {
         position: "bottom",
       });
       // setUser(data);
-      localStorage.setItem("userInfo", JSON.stringify(data));
+      setUser(data)
+      // localStorage.setItem("userInfo", JSON.stringify(data));
       setLoading(false);
       // history.push("/chats");
       navigate("/mainpage");

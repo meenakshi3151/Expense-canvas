@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import axios from "axios";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 const BASE_URL="http://localhost:5000/api/user/";
 /* 
     To avoid passing the props multiple times we are using Context,
@@ -9,11 +10,34 @@ const BASE_URL="http://localhost:5000/api/user/";
 const GlobalContext=React.createContext()
 export const GlobalProvider=({children})=>{
 
-    const [incomes,setIncomes]=useState([])
-    const [expenses,setExpenses]=useState([])
+    const [incomes,setIncomes]=useState([]);
+    const [expenses,setExpenses]=useState([]);
     const [bill,setBill]=useState([]);
     const [user, setUser] = useState(null); 
-    const [error,setError]=useState(null)
+    const [error,setError]=useState(null);
+    const navigate = useNavigate()
+
+    useEffect(()=>{
+        if(user){
+            localStorage.setItem("userInfo",JSON.stringify(user))
+            console.log(user)
+        }
+        
+    },[user])
+
+    useEffect(()=>{
+        const user = JSON.parse(localStorage.getItem("userInfo"))
+        const token = getCookies("token")
+        const currentPath = window.location.pathname
+        if(token) return;
+        else if(!user){
+            console.log("currentPath",currentPath)
+            if(currentPath === "/" || currentPath==="/register"){
+                return;
+            }
+            navigate("/")
+        }
+    },[navigate])
     //adding the incomes in  databases
     //this function is responsible for posting the data to database
     const addIncome= async(income)=>{
@@ -26,15 +50,15 @@ export const GlobalProvider=({children})=>{
     }
     //Get the data from database 
     const getIncome=async()=>{
-        const user = JSON.parse(localStorage.getItem("userInfo"))
 
+        console.log("xyz", user)
         const userId = user._id
         const params ={
             userId: userId}
         
         const response=await axios.get(`${BASE_URL}getIncomes`,{params:params})
     
-        setIncomes(response.data)
+        setIncomes(response?.data)
   
     }
     
@@ -66,7 +90,7 @@ export const GlobalProvider=({children})=>{
     }
 
     const getExpense=async()=>{
-        const user = JSON.parse(localStorage.getItem("userInfo"))
+
         
         const userId = user._id
         const params ={
@@ -76,6 +100,8 @@ export const GlobalProvider=({children})=>{
         const response=await axios.get(`${BASE_URL}getExpenses`,{params:params})
         setExpenses(response.data)
         console.log(response.data)
+
+        
     }
     
     //Deleting the Expense
@@ -122,7 +148,7 @@ export const GlobalProvider=({children})=>{
         
         const response=await axios.get(`${BASE_URL}getBills`,{params:params})
     
-        setBill(response.data)
+        setBill(response?.data)
     }
 
     const deleteBill=async(id)=>{
@@ -139,9 +165,31 @@ export const GlobalProvider=({children})=>{
           setError(error.response.data.message);
         }
     };
+    const getCookies=(cookieName)=>{
+        const name = cookieName + "=";
+        const decodeCookies = decodeURIComponent(document.cookie);
+        const cookieArray = decodeCookies.split(";");
+        for(let i = 0; i < cookieArray.length;i++){
+            let cookie = cookieArray[i].trim();
+            if(cookie.indexOf(name) === 0){
+                return cookie.substring(name.length,cookie.length);
+            }
+        }
+        return null;
+    }
 
-
-
+    const clearCookies = () => {
+        // Split the cookies string into an array of key-value pairs
+        const cookiesArray = document.cookie.split(';');
+      
+        // Loop through the cookies and remove each one
+        cookiesArray.forEach(cookie => {
+          const [name] = cookie.trim().split('=');
+      
+          // Set the expiration date to a date in the past to remove the cookie
+          document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+        });
+      };
 
 
     return(
@@ -167,7 +215,10 @@ export const GlobalProvider=({children})=>{
             addBill,
             deleteBill,
             user,
-            loginUser
+            setUser,
+            loginUser,
+            getCookies,
+            clearCookies
         }}>
             {children}
         </GlobalContext.Provider>

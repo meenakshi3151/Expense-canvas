@@ -80,7 +80,7 @@ exports.deleteExpense=async(req,res)=>{
             res.status(500).json({message:'server side error'})
         })
 }
-//storage...disk storage is to store the files according to us on the disk 
+//storage...disk storage is to store the files according to us on the disk
 const storage=multer.diskStorage({
     destination:'uploads',
     //cb: callback

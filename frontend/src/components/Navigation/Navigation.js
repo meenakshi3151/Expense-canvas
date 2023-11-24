@@ -4,15 +4,18 @@ import styled from "styled-components";
 import { dark, light } from "../../utils/icons";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
+import { useGlobalContext } from "../../context/globalContext";
 
 function Navigation({ active, setActive, toggleTheme, isDarkTheme }) {
   const [themeIcon, setThemeIcon] = useState(dark);
   const [borderColor, setBorderColor] = useState("#333");
+  const {clearCookies} = useGlobalContext();
   const navigate = useNavigate();
   const toast = useToast();
 
   const logoutHandler = () => {
     localStorage.removeItem("userInfo");
+    clearCookies();
     toast({
       title: "Logged Out Sucessfully",
       status: "error",

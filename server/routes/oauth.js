@@ -6,7 +6,8 @@ const useNavigate = require('react-router-dom');
 // const navigate = useNavigate();
 //handling the request from google
 dotenv.config();
-const { OAuth2Client } = require('google-auth-library');
+const { OAuth2Client, auth } = require('google-auth-library');
+const generateToken = require('../config/generateToken');
 var emailUser;
 router.get('/', async function (req, res, next) {
   const code = req.query.code;
@@ -23,7 +24,7 @@ router.get('/', async function (req, res, next) {
 
     const response = await fetch(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${user.access_token}`);
     const userData = await response.json();
-    console.log(userData);
+    console.log("userDAta",userData);
     // console.log(userData.name);
     emailUser = userData.email;
     const newUser = new User({
@@ -33,8 +34,26 @@ router.get('/', async function (req, res, next) {
        password: 'NotRequired!39&'
     });
 
-    const savedUser = await newUser.save();
-    console.log('User saved to MongoDB:', savedUser);
+    const authUser = await User.findOne({email:userData.email});
+    // const savedUser = await newUser.save();
+    console.log("auth user", authUser)
+    
+    const data = {
+      _id:authUser._id,
+      name:authUser.name,
+      email:authUser.email,
+      isAdmin:authUser.isAdmin,
+      pic:authUser.pic,
+      token:generateToken(authUser._id),
+    }
+    console.log("data",data)
+    res.cookie("_id",authUser._id)
+    res.cookie("name",authUser.name)
+    res.cookie("email",authUser.email)
+    res.cookie("isAdmin",authUser.isAdmin)
+    res.cookie("pic",authUser.pic)
+    res.cookie("token", generateToken(authUser._id),{secure:true})
+    // console.log('User saved to MongoDB:', savedUser);
   } catch (err) {
     console.log('Error logging in with OAuth2 user', err);
   }
