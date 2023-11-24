@@ -10,8 +10,8 @@ Expense Canvas is a full-stack application designed to manage personal finances,
 - **Stocks and Cryptos:** Shows various cryptocurrencies and stocks.
 - **Graphs:** Visual representation of expense and income data for better insights.
 - **Light/Dark Theme:** Choose between light and dark themes for personalized user experience.
--**Bill Notifications:** Receive reminders and notifications for upcoming due bills.
--**Add Friends:** Add and search your friends among all the users.
+- **Bill Notifications:** Receive reminders and notifications for upcoming due bills.
+- **Add Friends:** Add and search your friends among all the users.
 
 ## Tech Stack:
 
