@@ -37,6 +37,6 @@ Expense Canvas is a full-stack application designed to manage personal finances,
 
 Contributions are welcome! Feel free to open issues or pull requests for any enhancements or bug fixes.
 - 
-This project is licensed under the Codesangam which is organized by Computer Coding, MNNIT.
+This project is made under the Codesangam which is organized by Computer Coding, MNNIT.
 
-- 
+
