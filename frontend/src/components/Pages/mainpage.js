@@ -21,12 +21,13 @@ import { useEditable } from "@chakra-ui/react";
 function App() {
   const { toggleTheme, isDarkTheme } = useThemeContext();
   const [active, setActive] = useState(1);
-  const { getCookies, setUser } = useGlobalContext();
+  const { getCookies, setUser,user } = useGlobalContext();
   const [borderColor, setBorderColor] = useState("#333");
 
   useEffect(() => {
     const token = getCookies("token");
     if (token) {
+      console.log("Token found")
       const data = {
         _id: getCookies("_id").split('"')[1],
         name: getCookies("name"),
@@ -35,7 +36,12 @@ function App() {
         pic: getCookies("pic"),
         token: getCookies("token"),
       };
+      localStorage.setItem("userInfo",JSON.stringify(data))
       setUser(data);
+    }
+    else{
+      const user = JSON.parse(localStorage.getItem('userInfo'));
+      setUser(user)
     }
   }, []);
 
@@ -79,7 +85,8 @@ function App() {
           setActive={setActive}
           toggleTheme={toggleTheme}
         />
-        <main>{displayData()}</main>
+        {user &&
+        <main>{displayData()}</main>}
 
         {/* <LogoutButton onClick={handleLogout}>Logout</LogoutButton> */}
       </MainLayout>

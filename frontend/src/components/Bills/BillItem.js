@@ -6,11 +6,10 @@ import { Education_Bill, Internet_bill, Loan_Bill, Medical_Bill, Phone_Bill, cal
 import { toast } from 'react-toastify';
 
 function BillItem({id,key,title,amount,date,category,type,deleteItem}){
-    // const {bill}=useGlobalContext();
-    // console.log('bill:'+bill);
+    
     const [buttonText,setButtonText]=useState("Pending")
     const [color,setColor]=useState("red");
-    // const currentTime=new Date();
+    
     
     
     const timeRemaining = () => {
@@ -24,11 +23,11 @@ function BillItem({id,key,title,amount,date,category,type,deleteItem}){
         console.log(date2)
         const timeDifference = date2 - date1;
       
-        // Convert the time difference to days, hours, minutes, and seconds
+        // Convert the time difference to days, hours and minutes
         const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
         const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+        
        
       
         // Format the result
@@ -36,13 +35,9 @@ function BillItem({id,key,title,amount,date,category,type,deleteItem}){
       };
       useEffect(()=>{
         const currTime = new Date();
-        // const actualTime=dateFormat(currentTime);
         const dueTime = date
-        // console.log('date:'+date);
         const date1=new Date(currTime);
         const date2=new Date(dueTime)
-        console.log(date1)
-        console.log(date2)
         const timeDifference = date2 - date1;
       
         // Convert the time difference to days, hours, minutes, and seconds
@@ -52,7 +47,7 @@ function BillItem({id,key,title,amount,date,category,type,deleteItem}){
         const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
 
       
-
+        //Giving the warning message to remind the due date
         if(days<3 && days>=0){
             toast.warning("Your bill is due in less than 3 days");
            }
@@ -100,7 +95,6 @@ function BillItem({id,key,title,amount,date,category,type,deleteItem}){
                             {buttonText === 'Pending' ? `Time Remaining: ${timeRemaining()}` : 'Paid✅'}
                         </p>
 
-                        {/* <button>Done</button> */}
                         <div className="extra">
                         <button onClick={() => {
                             setButtonText("Done");
@@ -206,7 +200,7 @@ color: #222260;
                 transition: background-color 0.3s;
                 &:hover {
                     background-color: #FFC984; /* Change background color on hover */
-                    cursor: pointer; /* Change cursor to a pointer on hover (optional) */
+                    cursor: pointer; 
                 }
             }
             .t{

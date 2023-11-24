@@ -8,14 +8,14 @@ import { useEffect } from 'react';
 import History from '../../History/History';
 
 function Dashboard(){
-    const {totalExpense,totalIncome,user,totalBalance,getIncome,getExpense,incomes,expenses}=useGlobalContext();
+    const {totalExpense,totalIncome,user,totalBalance,getIncome,getExpense,incomes,expenses,setUser}=useGlobalContext();
     useEffect(()=>{
-        if(user){
-            console.log("User",user)
+        // console.log("User dash dash",user)
+        const user = JSON.parse(localStorage.getItem('userInfo'))
+        setUser(user);
             getIncome()
             getExpense()
-        }
-    },[user])
+    },[])
     return(
         <DashboardStyle>
            <InnerLayout>

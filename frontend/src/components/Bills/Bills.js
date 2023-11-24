@@ -15,7 +15,10 @@ function Bills(){
     return(
         <BillStyle>
             <InnerLayout>
-                <h1>BILLS</h1>
+                <div className="header">
+                    <h1>BILLS</h1>
+                </div>
+
                 <div className="inner-content">
                     <div className="bill-form">
                         <BillsForm/>
@@ -57,6 +60,11 @@ display:flex;
 overflow:auto;
 flex-direction:row;
 width:100%;
+
+.header{
+    backgound-color:red;
+}
+
 .totalIncome{
     //this is the top bar 
     display:flex;
@@ -64,7 +72,6 @@ width:100%;
     align-items:center;
     background:#FCF6F9;
     border: 2px solid #FFFFFF;
-    // border:solid;
     box-shadow:0px 1px 15px rgba(0,0,0,0.06);
     border-radius:20px;
     padding:1rem;

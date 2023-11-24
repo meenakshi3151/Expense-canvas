@@ -41,7 +41,6 @@ export const GlobalProvider=({children})=>{
     //adding the incomes in  databases
     //this function is responsible for posting the data to database
     const addIncome= async(income)=>{
-        
         const response=await axios.post(`${BASE_URL}addIncome`,income)
         .catch((err)=>{
             setError(err.response.data.message)
@@ -50,7 +49,7 @@ export const GlobalProvider=({children})=>{
     }
     //Get the data from database 
     const getIncome=async()=>{
-
+        const user = JSON.parse(localStorage.getItem("userInfo"))
         console.log("xyz", user)
         const userId = user._id
         const params ={
@@ -90,7 +89,7 @@ export const GlobalProvider=({children})=>{
     }
 
     const getExpense=async()=>{
-
+        const user = JSON.parse(localStorage.getItem("userInfo"))
         
         const userId = user._id
         const params ={
