@@ -8,10 +8,9 @@ const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 const cors = require('cors'); // Import the 'cors' middleware
 const fs=require('fs')
 const chatRoutes = require("./routes/chatRoutes");
-
-
+const requestAuth=require("./routes/requestAuth")
+const authRout=require('./routes/oauth')
 dotenv.config();
-
 connectDB();
 const app = express();
 app.use(express.json()); // to accept JSON data
@@ -44,6 +43,8 @@ const PORT = process.env.PORT;
 app.use('/api/user', userRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/message', messageRoutes);
+app.use('/requestAuth',requestAuth)
+app.use('/oauth',authRout);
 
 app.use(notFound);
 app.use(errorHandler);
