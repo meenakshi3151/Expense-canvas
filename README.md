@@ -12,8 +12,8 @@ Expense Canvas is a full-stack application designed to manage personal finances,
 - **Light/Dark Theme:** Choose between light and dark themes for personalized user experience.
 - **Bill Notifications:** Receive reminders and notifications for upcoming due bills.
 - **Add Friends:** Add and search your friends among all the users.
-- **Groups:**Organize groups with your friends for real-time chat and split expenses.
-- **Log out:**Logging out the current user and get back to the login page.
+- **Groups:** Organize groups with your friends for real-time chat and split expenses.
+- **Log out:** Logging out the current user and get back to the login page.
 
 ## Tech Stack:
 ### Libraries
@@ -24,22 +24,21 @@ Expense Canvas is a full-stack application designed to manage personal finances,
 - ### Framework and Tools
   - **Chakra UI:** Integrated Chakra UI React styled components for consistent and customizable UI elements.
   - **Express.js:** Routing and API management.
-    
-  ### Database
+
+### Database
 - **MongoDB:** Database for storing user-specific financial data.
-- ### Runtime Enviroment
+### Runtime Enviroment
 - **Node.js:** Backend server environment.
 ## Usage:
 
 1. Clone the repository:git clone https://github.com/Ishsinghal/Expense-canvas.git
-2.Install dependencies:
-**cd   Expense-canvas
+2.Install dependencies:**cd   Expense-canvas
 3.Start the server: cd server->npm i->npm install google-auth-library->npm start
 4.Start the client in parallel terminal: cd frontend->npm i->npm start
 5.Set up environment variables:
 - Create a `.env` file and add necessary variables (e.g., MongoDB URI, Get your Google Auth credentials from Google cloud console).
-4.Run the application:
-5.Access the application via `http://localhost:3000`.
+6.Run the application:
+7.Access the application via `http://localhost:3000`.
 
 ## Contributing:
 
